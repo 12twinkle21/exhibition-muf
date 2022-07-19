@@ -1,10 +1,38 @@
-import React from 'react';
+import React, {startTransition, useEffect, useMemo, useState, useTransition} from 'react';
 import styles from './Main.module.scss';
 import Slider from "react-slick";
+
+//1. Прикрутить апи рекомендаций +
+//2. Сделать дебаунс на 1.5сек +
+//3. Поправить дизайн рекомендаций в панели +
+//4. Сделать теги 
+
+
 
 import MapComponent from '../../components/MapComponent';
 import RecommendationCard from '../../components/RecommendationCard/RecommendationCard';
 import {VirtualKeyboard} from "../../components/VirtualKeyboard/VirtualKeyboard";
+import axios from "axios";
+
+
+export function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(
+    () => {
+      const handler = setTimeout(() => {
+        setDebouncedValue(value);
+      }, delay);
+
+      return () => {
+        clearTimeout(handler);
+      };
+    },
+    [value]
+  );
+
+  return debouncedValue;
+}
 
 function Main() {
 
@@ -23,37 +51,79 @@ function Main() {
     slidesToScroll: 1
   };
 
+
+  const [allItems, setAllItems] = useState()
+
+  const RECOMENDED_API_URL = 'https://exhibition-muf-maps.truemachine.space/api/objects'
+
+
+  async function fetchData() {
+    try {
+      await axios.get(RECOMENDED_API_URL).then((response) => {
+        const allItemsFromResponse = response.data.data
+        setAllItems(allItemsFromResponse.items)
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  const debouncedSearchTerm = useDebounce(searchTerm, 1500);
+
+
+  useEffect(
+    () => {
+      if (debouncedSearchTerm) {
+        setSearchResults(allItems.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase())));
+
+      } else if (searchTerm) {
+        setSearchResults([]);
+      } else {
+        setSearchResults(allItems);
+      }
+    },
+    [debouncedSearchTerm, allItems]
+  );
+
+
   return (
     <div className={styles.main}>
       <div className={styles.main__top}>
-         <h1>Где мне заняться спортом?</h1>
+        <h1>Где мне заняться спортом?</h1>
       </div>
       <div className={styles.main__content}>
         <div className={styles.contentMenu}>
           <h2>Поиск</h2>
           <h3>Виды спорта</h3>
           <div className={styles.contentMenu__search}>
-          <VirtualKeyboard langKey={'ru'}/>
-          {/*<input type='text' placeholder='Искать'/>*/}
-          {/*<img src='img/iconSearch.png' width={246} height={212} alt='Search icon'/>*/}
+            <VirtualKeyboard langKey={'ru'} onChange={text => setSearchTerm(text)}/>
+            {/*<input type='text' placeholder='Искать'/>*/}
+            {/*<img src='img/iconSearch.png' width={246} height={212} alt='Search icon'/>*/}
           </div>
           <div className={styles.contentMenu__sports}>
-            {
-              sports.map(sport => <span>{sport}</span>)
-            }
+            {/*{*/}
+            {/*  sports.map(sport => <span>{sport}</span>)*/}
+            {/*}*/}
           </div>
           <div className={styles.contentMenu__results}>
             <h3>Результаты поиска:</h3>
             <div className={styles.contentMenu__resultsItems}>
-            {
-              results.map(result => <span>{result}</span>)
-            }
+              {searchResults?.length && (
+                searchResults.map(item => <span key={item.id}>{item.name}</span>)
+              )}
             </div>
           </div>
         </div>
-      <div className={styles.contentMap}>
-        <MapComponent/>
-        <div className={styles.contentMap__recommendation}>
+        <div className={styles.contentMap}>
+          {/*<MapComponent/>*/}
+          <div className={styles.contentMap__recommendation}>
             <h2>Рекомендации:</h2>
             <Slider {...settings}>
               <RecommendationCard/>
@@ -61,8 +131,8 @@ function Main() {
               <RecommendationCard/>
               <RecommendationCard/>
             </Slider>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   )

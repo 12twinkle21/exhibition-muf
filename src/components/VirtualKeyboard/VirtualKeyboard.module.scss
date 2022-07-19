@@ -3,28 +3,52 @@
   &__keyboard{
     position: fixed;
     z-index: 1;
-    top: 75vh;
+    top: 65vh;
     left: 0;
     width: 100vw;
-    height: 25vh;
-    background: darkcyan;
+    height: 35vh;
+    background: #E9EFF7;
     overflow: hidden;
     transition: height 0.3s, transform 0.3s;
 
     &--m-visible{
-      height: 25vh;
+      height: 35vh;
       transform: translateY(0);
     }
     &--m-hidden{
       height: 0;
-      transform: translateY(25vh);
+      transform: translateY(30vh);
       transition: height 0.3s, transform 0.3s;
     }
-
+    :global(.hg-theme-default){
+      background: unset;
+      padding: 0;
+    }
+    :global(.hg-row:first-child){
+      padding-top: 1vh;
+    }
     //all btn styles
     :global(.hg-button){
-      height: 5vh;
-      font-size: 2vw;
+      height: 6vh;
+      color: #384057;
+      background: white;
+      font-size: 300px;
+      border-radius: 100px;
+      margin: 30px !important;
+      box-shadow: unset;
+      padding: 0 !important;
+      outline: 1px solid #384057;
+      //border-bottom: 10px solid #384057;
+      //border-left: 10px solid #384057;
+      border-bottom: none;
+      transition: background 0.3s, color 0.3s;
+      &:active{
+        outline: unset;
+        color: black;
+      }
+    }
+    :global(.hg-theme-default .hg-row .hg-button:not(:last-child)){
+      //margin-right: 0;
     }
     //.com btn styles
     :global(.hg-theme-default .hg-button.hg-standardBtn[data-skbtn=".com"]){
@@ -37,14 +61,34 @@
 
     :global(.hg-button[data-skbtn="{close}"]){
       font-size: 0;
+      position: relative;
+      background: #9D2030;
+      transition: background 0.3s;
+
+      &:active{
+        background: white;
+        color: black;
+      }
+      &::before{
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        content: "";
+        width: 40%;
+        height: 30px;
+        transform: rotate(135deg);
+        background: white;
+      }
+
       &::after{
-        content: "\00d7";
-        width: 100%;
-        height: 100%;
-        font-size: 2vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        content: "";
+        width: 40%;
+        height: 30px;
+        transform: rotate(45deg);
+        background: white;
       }
     }
   }
@@ -52,18 +96,39 @@
   &__input{
 
   }
-  .input{
+  & .input{
     position: relative;
+    width: 2439px;
+    height: 460px;
+    //border: 10px solid #315390;
+    border: 10px solid #315390;
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 400px;
+
+    input{
+      width: 100%;
+      height: 240px;
+      font-size: 150px;
+      border: unset;
+      outline: unset;
+
+      &::placeholder{
+        color: #315390;
+        font-size: 150px;
+        margin-top: 20px;
+        //line-height: 120%;
+      }
+    }
 
     &__icon{
       position: absolute;
-      left: calc(100% - 0.7vw - 2.5vw);
+      left: 128px;
       top: 0;
-      width: 2.5vw;
-      height: calc(100% - 0.7vw);
+      width: 200px;
+      height: 100%;
       display: flex;
       align-items: center;
-      //height: 212px;
 
       & img{
         position: relative;

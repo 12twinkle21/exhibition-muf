@@ -14,18 +14,25 @@ const LANGUAGES_STORE = {
 }
 
 export const VirtualKeyboard = (props) => {
-  const {langKey: langKeyFromProps = 'ru'} = props
+  const {langKey: langKeyFromProps = 'ru', onChange: onChangeFromProps} = props
 
   const [inputText, setInputText] = useState('')
   const [shiftInfo, setShiftInfo] = useState('default')
   const [langKey, setLangKey] = useState(langKeyFromProps)
   const [showKeyboard, setShowKeyboard] = useState(false)
+  console.log(inputText);
 
+  // useEffect(() => {
+  //   setInputText(inputText);
+  //   onChangeFromProps(inputText)
+  //
+  // }, [inputText])
   let keyboard = useRef()
 
-  const onChange = (text) => {
-    setInputText(text);
-  }
+  // const onChange = (text) => {
+  //   setInputText(text);
+  //   onChangeFromProps(text)
+  // }
 
   const onKeyPress = (buttonKey) => {
     if (buttonKey === ENTER_KEY) {
@@ -67,10 +74,16 @@ export const VirtualKeyboard = (props) => {
     const layoutWithCloseBtn = LANGUAGES_STORE[langKey].layout || {default: [], shift: []}
     layoutWithCloseBtn.default[0] = `{close} ${layoutWithCloseBtn.default[0]}`
     layoutWithCloseBtn.shift[0] = `{close} ${layoutWithCloseBtn.shift[0]}`
+    layoutWithCloseBtn.default[layoutWithCloseBtn.default.length - 1] = `{space}`
+    layoutWithCloseBtn.shift[layoutWithCloseBtn.shift.length - 1] = `{space}`
 
     return layoutWithCloseBtn
   }, [langKey])
 
+  const onKeyboardInputChange = (text) => {
+    setInputText(text)
+    onChangeFromProps(text)
+  }
   return (
     <div
       className={styles.VirtualKeyboard}>
@@ -78,11 +91,11 @@ export const VirtualKeyboard = (props) => {
         <input
           value={inputText}
           onClick={handleInputClick}
+          onChange={(e) => onKeyboardInputChange(e.target.value)}
           placeholder={"Поиск"}
-          onChange={onChangeInput}
         />
         <div className={styles.input__icon}>
-          <img src='img/iconSearch.png' alt='Search icon'/>
+          <img src='img/icon_search.svg' alt='Search icon'/>
         </div>
       </div>
       <div
@@ -90,7 +103,7 @@ export const VirtualKeyboard = (props) => {
         <Keyboard
           keyboardRef={r => (keyboard.current = r)}
           layoutName={shiftInfo}
-          onChange={onChange}
+          onChange={onKeyboardInputChange}
           onKeyPress={onKeyPress}
           layout={formatterLayout}
         />
