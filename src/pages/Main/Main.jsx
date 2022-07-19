@@ -4,6 +4,7 @@ import Slider from "react-slick";
 
 import MapComponent from '../../components/MapComponent';
 import RecommendationCard from '../../components/RecommendationCard/RecommendationCard';
+import {VirtualKeyboard} from "../../components/VirtualKeyboard/VirtualKeyboard";
 
 function Main() {
 
@@ -32,8 +33,9 @@ function Main() {
           <h2>Поиск</h2>
           <h3>Виды спорта</h3>
           <div className={styles.contentMenu__search}>
-          <input type='text' placeholder='Искать'/>
-          <img src='img/iconSearch.png' width={246} height={212} alt='Search icon'/>
+          <VirtualKeyboard langKey={'ru'}/>
+          {/*<input type='text' placeholder='Искать'/>*/}
+          {/*<img src='img/iconSearch.png' width={246} height={212} alt='Search icon'/>*/}
           </div>
           <div className={styles.contentMenu__sports}>
             {
