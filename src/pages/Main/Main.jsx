@@ -1,15 +1,11 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import styles from './Main.module.scss';
 import Slider from "react-slick";
-
-//8. Добавить статичные текста в конфиги переводов
-
 import MapComponent from '../../components/MapComponent';
 import RecommendationCard from '../../components/RecommendationCard/RecommendationCard';
 import {VirtualKeyboard} from "../../components/VirtualKeyboard/VirtualKeyboard";
 import axios from "axios";
 import {useTranslation} from "react-i18next";
-
 
 const DEFAULT_LANG_KEY = 'ru'
 
@@ -52,6 +48,31 @@ function Main() {
   const [langKey, setLangKey] = useState(DEFAULT_LANG_KEY)
   const {t, i18n} = useTranslation();
 
+  const [recommendedItems, setRecommendedItems] = useState();
+  const [mapItems, setMapItems] = useState([]);
+
+  async function fetchData() {
+    try {
+      await axios.get(RECOMENDED_API_URL).then((response) => {
+        const allItemsFromResponse = response.data.data
+        setRecommendedItems(allItemsFromResponse.items)
+      })
+
+      await axios.get('https://exhibition-muf-maps.truemachine.space/api/objects').then((resp) => {
+        const mapPersons = resp.data.data;
+        setMapItems(mapPersons.items);
+      });
+
+    } catch (error) {
+      alert('Ошибка при запросе данных ;(');
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
 
   const sportsTag = useMemo(() => {
     return [
@@ -74,25 +95,8 @@ function Main() {
 
   const [activeSportTagId, setActiveSportTagId] = useState(null)
 
-  const [allItems, setAllItems] = useState()
-
   const RECOMENDED_API_URL = 'https://exhibition-muf-maps.truemachine.space/api/objects'
 
-
-  async function fetchData() {
-    try {
-      await axios.get(RECOMENDED_API_URL).then((response) => {
-        const allItemsFromResponse = response.data.data
-        setAllItems(allItemsFromResponse.items)
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -103,15 +107,15 @@ function Main() {
   useEffect(
     () => {
       if (debouncedSearchTerm) {
-        setSearchResults(allItems.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase())));
+        setSearchResults(recommendedItems.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase())));
 
       } else if (searchTerm) {
         setSearchResults([]);
       } else {
-        setSearchResults(allItems);
+        setSearchResults(recommendedItems);
       }
     },
-    [debouncedSearchTerm, allItems]
+    [debouncedSearchTerm, recommendedItems]
   );
 
   function handleSportTagClick(sportTagId) {
@@ -178,14 +182,16 @@ function Main() {
           </div>
         </div>
         <div className={styles.contentMap}>
-          {/*<MapComponent/>*/}
+          <MapComponent mapMarks={mapItems}/>
           <div className={styles.contentMap__recommendation}>
             <h2>{t('map.recomendationTitle')}</h2>
             <Slider {...SWIPER_SETTINGS}>
-              <RecommendationCard/>
-              <RecommendationCard/>
-              <RecommendationCard/>
-              <RecommendationCard/>
+              {
+                recommendedItems?.length &&
+                recommendedItems.map((items, index) => (
+                  <RecommendationCard items={items} key={`${items.name_ru}_${index}`}/>)
+                )
+              }
             </Slider>
           </div>
         </div>
