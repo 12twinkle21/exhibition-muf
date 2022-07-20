@@ -1,38 +1,27 @@
-import React, {useEffect, useMemo, useRef, useState} from "react";
+import React, {useMemo, useRef, useState} from "react";
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import engLand from "simple-keyboard-layouts/build/layouts/english";
 import russianLang from "simple-keyboard-layouts/build/layouts/russian";
 import styles from './VirtualKeyboard.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const ENTER_KEY = '{enter}'
 const CLOSE_KEY = '{close}'
 
-const LANGUAGES_STORE = {
+const KEYBOARD_LANGUAGES_STORE = {
   'ru': russianLang,
-  'eng': engLand
+  'en': engLand
 }
-
 export const VirtualKeyboard = (props) => {
-  const {langKey: langKeyFromProps = 'ru', onChange: onChangeFromProps} = props
+  const {langKey = 'ru', onChange: onChangeFromProps} = props
 
   const [inputText, setInputText] = useState('')
   const [shiftInfo, setShiftInfo] = useState('default')
-  const [langKey, setLangKey] = useState(langKeyFromProps)
   const [showKeyboard, setShowKeyboard] = useState(false)
-  console.log(inputText);
 
-  // useEffect(() => {
-  //   setInputText(inputText);
-  //   onChangeFromProps(inputText)
-  //
-  // }, [inputText])
+  const { t } = useTranslation();
   let keyboard = useRef()
-
-  // const onChange = (text) => {
-  //   setInputText(text);
-  //   onChangeFromProps(text)
-  // }
 
   const onKeyPress = (buttonKey) => {
     if (buttonKey === ENTER_KEY) {
@@ -59,23 +48,21 @@ export const VirtualKeyboard = (props) => {
     toggleShowKeyboard()
   }
 
-  const onChangeInput = event => {
-    const input = event.target.value;
-    setInputText(input)
-    keyboard?.current.setInput(input);
-  };
-
   const toggleShowKeyboard = () => {
     setShowKeyboard(!showKeyboard)
   }
 
-  useEffect(() => setLangKey(langKeyFromProps), [langKeyFromProps])
   const formatterLayout = useMemo(() => {
-    const layoutWithCloseBtn = LANGUAGES_STORE[langKey].layout || {default: [], shift: []}
-    layoutWithCloseBtn.default[0] = `{close} ${layoutWithCloseBtn.default[0]}`
-    layoutWithCloseBtn.shift[0] = `{close} ${layoutWithCloseBtn.shift[0]}`
-    layoutWithCloseBtn.default[layoutWithCloseBtn.default.length - 1] = `{space}`
-    layoutWithCloseBtn.shift[layoutWithCloseBtn.shift.length - 1] = `{space}`
+    const layoutWithCloseBtn = KEYBOARD_LANGUAGES_STORE[langKey].layout || {default: [], shift: []}
+    const firstKeyRowDefault = layoutWithCloseBtn.default[0].split(' ').filter((key) => key !== '{close}').join(' ')
+    const firstKeyRowShift = layoutWithCloseBtn.shift[0].split(' ').filter((key) => key !== '{close}').join(' ')
+    const lastKeyRowDefault = layoutWithCloseBtn.default[layoutWithCloseBtn.default.length - 1]
+    const lastKeyRowShift = layoutWithCloseBtn.shift[layoutWithCloseBtn.shift.length - 1]
+
+    layoutWithCloseBtn.default[0] = `{close} ${firstKeyRowDefault}`
+    layoutWithCloseBtn.shift[0] = `{close} ${firstKeyRowShift}`
+    layoutWithCloseBtn.default[lastKeyRowDefault] = `{space}`
+    layoutWithCloseBtn.shift[lastKeyRowShift] = `{space}`
 
     return layoutWithCloseBtn
   }, [langKey])
@@ -84,15 +71,16 @@ export const VirtualKeyboard = (props) => {
     setInputText(text)
     onChangeFromProps(text)
   }
+
   return (
     <div
       className={styles.VirtualKeyboard}>
-      <div className={styles.VirtualKeyboard__input + ' ' + styles.input}>
+      <div className={styles.input}>
         <input
           value={inputText}
           onClick={handleInputClick}
           onChange={(e) => onKeyboardInputChange(e.target.value)}
-          placeholder={"Поиск"}
+          placeholder={t('not_found_title')}
         />
         <div className={styles.input__icon}>
           <img src='img/icon_search.svg' alt='Search icon'/>
