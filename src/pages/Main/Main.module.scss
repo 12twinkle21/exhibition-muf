@@ -24,8 +24,7 @@
   }
 
   :global(.ymaps-2-1-79-balloon) {
-    :global(.ymaps-2-1-79-balloon__layout) {
-    }
+    
 
     :global(.ymaps-2-1-79-balloon__content) {
       padding: calcSize(200);
@@ -37,8 +36,7 @@
       height: max-content !important;
     }
 
-    :global(.ymaps-2-1-79-balloon__tail) {
-    }
+  
 
     :global(h3) {
       font-weight: 900;
