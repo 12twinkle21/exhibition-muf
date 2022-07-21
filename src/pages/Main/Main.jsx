@@ -248,7 +248,7 @@ function Main() {
   useEffect(() => {
     fetchData();
   }, []);
-
+  console.log(recommendedItems)
   const filtredRecommendedItems = useMemo(() => {
     if (!debouncedSearchTerm && !activeSportTagIds?.length) {
       return recommendedItems

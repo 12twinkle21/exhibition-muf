@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
 *{
    margin: 0;
@@ -19,22 +19,7 @@ body{
 //     filter: grayscale(100%);
 //}
 
-:global(.RecommendationCard_recommendationCard__frontLeft .slick-prev){
-   display: none !important;
-}
-:global(.RecommendationCard_recommendationCard__frontLeft .slick-next){
-   right: 0;
-   top: unset;
-   bottom: 0;
-}
-:global(.RecommendationCard_recommendationCard__frontLeft .slick-slider),
-:global(.RecommendationCard_recommendationCard__frontLeft .slick-list),
-:global(.RecommendationCard_recommendationCard__frontLeft .slick-track){
-   height: 100%;
-}
-:global(.RecommendationCard_recommendationCard__frontLeft .slick-slide > div){
-   height: 100%;
-}
+
 
 @function calcSize($width) {
    @return (100 * ($width / 20094)) * 1vw;
