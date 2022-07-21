@@ -10,13 +10,94 @@
   background-size: contain;
   background-repeat: no-repeat;
 
+  :global(.ymaps-2-1-79-balloon) {
+    :global(.ymaps-2-1-79-balloon__layout) {
+    }
+
+    :global(.ymaps-2-1-79-balloon__content) {
+      padding: calcSize(200);
+    }
+    :global(.ymaps-2-1-79-balloon__content > ymaps) {
+      max-width: calcSize(4000);
+      width: max-content !important;
+      max-height: calcSize(4000);
+      height: max-content !important;
+    }
+
+    :global(.ymaps-2-1-79-balloon__tail) {
+    }
+
+    :global(h3) {
+      font-weight: 900;
+      font-size: calcSize(300);
+      line-height: 120%;
+      text-transform: uppercase;
+      color: #384057;
+    }
+    :global(main){
+      margin-top: calcSize(80);
+      display: flex;
+      flex-direction: column;
+    }
+    :global(main span) {
+      font-weight: 600;
+      font-size: calcSize(180);
+      line-height: 120%;
+      text-transform: lowercase;
+      color: #384057;
+      margin-left: calcSize(260);
+      position: relative;
+      white-space: nowrap;
+      width: max-content;
+
+      &:after{
+        content: '';
+        width: calcSize(180);
+        height: calcSize(180);
+        position: absolute;
+        top: 0;
+        left: calc(#{calcSize(260)} * -1);
+        z-index: 100;
+        background: url("../../../public/img/map_pin_bullet.svg");
+        background-size: contain;
+      }
+    }
+
+    :global(aside) {
+      position: relative;
+      font-weight: 300;
+      font-size: calcSize(180);
+      line-height: 120%;
+      margin-top: calcSize(324);
+      color: #384057;
+
+      :global(div) {
+        margin-left: calcSize(300);
+      }
+
+      &:after {
+        content: '';
+        width: calcSize(220);
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: calcSize(220);
+        z-index: 100;
+        //background: url("../../../public/img/main_background.svg");
+        background: url("../../../public/img/map_pin_adress.svg");
+        background-size: contain;
+      }
+    }
+  }
 
   .leftFloatText {
     text-transform: uppercase;
     line-height: 110%;
+    width: calcSize(3100);
+    height: calcSize(664);
     font-size: calcSize(300);
     transform: rotate(270deg);
-    left: calc((#{calcSize(3000)} / 3) * -1);
+    left: calc(#{calcSize(3100)} * 0.3 * -1);
     top: calcSize(6800);
     position: absolute;
 
@@ -48,7 +129,7 @@
     }
   }
 
-  .LangBtn{
+  .LangBtn {
     position: absolute;
     width: calcSize(1115);
     height: calcSize(1115);
@@ -61,125 +142,14 @@
     border: none;
     outline: none;
 
-    &:active{
+    &:active {
       background: white;
       color: #335799;
     }
   }
 
-
   &__content {
     display: flex;
     flex: 1;
-  }
-
-  .leftFloatMenu {
-    background-color: white;
-    outline: #{calcSize(10)} solid #C7C7C7;
-    padding: calcSize(240) calcSize(200);
-    position: absolute;
-    width: calcSize(2839);
-    height: calcSize(6735);
-    left: calcSize(1122);
-    top: calcSize(2220);
-
-    h2 {
-      font-size: 2vw;
-      font-weight: 700;
-      color: #384054;
-    }
-
-    h3 {
-      margin-top: 1vw;
-      margin-bottom: 0.5vw;
-      font-size: calcSize(200);
-      line-height: 120%;
-      font-weight: 900;
-      text-transform: uppercase;
-      color: #384057;
-    }
-
-    &__search {
-      position: relative;
-      margin-top: calcSize(200);
-
-      img {
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
-    }
-
-    &__sportsTag {
-      margin: calcSize(240) 0 calcSize(380);
-      display: flex;
-      width: calc(100% + #{calcSize(50)});
-      flex-wrap: wrap;
-      gap: calcSize(80);
-    }
-
-    &__sportsTag .sportTag {
-      background: #E9EFF7;
-      border-radius: calcSize(10000);
-      width: fit-content;
-      padding: calcSize(80) calcSize(120);
-      font-size: calcSize(150);
-      line-height: 120%;
-      color: rgba(49, 83, 144, 0.65);
-      cursor: pointer;
-      font-weight: 400;
-      transition: background 0.3s, color 0.3s, font-weight 0.3s;
-
-      &--m-active {
-        background: #315390;
-        font-weight: 600;
-        color: #FFFFFF;
-        transition: background 0.3s, color 0.3s, font-weight 0.3s;
-      }
-    }
-
-    &__resultsContainer {
-      margin-top: calcSize(180);
-      overflow-y: scroll;
-      max-height: calcSize(2000);
-    }
-
-    &__resultsItems span {
-      display: block;
-      border-top: calcSize(10) solid #C7C7C7;
-      padding: calcSize(160) 0;
-      font-weight: 600;
-      font-size: calcSize(150);
-      line-height: 120%;
-      color: #315390;
-    }
-
-    &__resultsItems span:first-child {
-      margin-top: calcSize(180);
-    }
-  }
-
-  .contentMap {
-    position: absolute;
-    width: calcSize(15030);
-    height: calcSize(8956);
-    left: calcSize(3961);
-    top: calcSize(1121);
-
-    .contentMap__recommendation {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding-left: 3%;
-      padding-bottom: 7%;
-    }
-
-    .contentMap__recommendation h2 {
-      font-size: 2vw;
-      font-weight: 700;
-      color: #384054;
-      margin-bottom: 0.5vw;
-    }
   }
 }

@@ -30,6 +30,7 @@ export const VirtualKeyboard = (props) => {
     }
     if (buttonKey === CLOSE_KEY) {
       setInputText('')
+      onChangeFromProps('')
       keyboard?.current.clearInput()
       toggleShowKeyboard()
       return;
@@ -80,7 +81,7 @@ export const VirtualKeyboard = (props) => {
           value={inputText}
           onClick={handleInputClick}
           onChange={(e) => onKeyboardInputChange(e.target.value)}
-          placeholder={t('not_found_title')}
+          placeholder={t('searchInputPlaceholder')}
         />
         <div className={styles.input__icon}>
           <img src='img/icon_search.svg' alt='Search icon'/>

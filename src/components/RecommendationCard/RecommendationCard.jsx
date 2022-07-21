@@ -3,8 +3,10 @@ import styles from './RecommendationCard.module.scss';
 
 function RecommendationCard(props) {
   const {items} = props
-  let [visibleBackCard, setVisibleBackCard] = React.useState(false);
-  let onVisibleBackCard = () => {
+
+  const [visibleBackCard, setVisibleBackCard] = React.useState(false);
+
+  const onVisibleBackCard = () => {
     setVisibleBackCard(!visibleBackCard);
   }
 
@@ -29,7 +31,7 @@ function RecommendationCard(props) {
               <ul>
 
                 {
-                  formattedItems.map((sport, index) => <li key={index}>{sport}</li>)
+                  formattedItems.map((sport) => <li key={`${sport}${items.id}`}>{sport}</li>)
                 }
               </ul>
             </div>
