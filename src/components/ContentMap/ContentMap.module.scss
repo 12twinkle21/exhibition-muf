@@ -7,27 +7,38 @@
   left: calcSize(3961);
   top: calcSize(1121);
 
-  .contentMap__recommendation {
+  .contentMap__recommendation{
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    //padding-left: 3%;
-    //padding-bottom: 7%;
 
     :global(.slick-arrow){
       width: calcSize(500);
       height: calcSize(500);
-      background: rebeccapurple;
+      z-index: 1000;
+    }
+    :global(.slick-next::before), :global(.slick-prev::before){
+      content: '';
+    }
+    :global(.slick-next), :global(.slick-prev){
+      background-image: url(../../../public/img/bigSliderArrow.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    :global(.slick-next){
+      right: calcSize(300);
+      transform: rotate(180deg);
+    }
+    :global(.slick-prev){
+      left: calcSize(300);
     }
     :global(.slick-track){
       min-width: max-content;
     }
     :global(.slick-slide) {
       transition: transform 0.3s, width 0.3s;
-    }
-    :global(.slick-center){
-      transform: scale(1.1) !important;
     }
     :global(.slick-active:not(.slick-center)){
       transform: scale(0.9);
@@ -40,5 +51,21 @@
     color: #384054;
     margin-bottom: 0.5vw;
   }
-
+  
+  :global(.RecommendationCard_recommendationCard__frontLeft .slick-prev){
+    display: none !important;
+ }
+ :global(.RecommendationCard_recommendationCard__frontLeft .slick-next){
+    right: 0;
+    top: unset;
+    bottom: 0;
+ }
+ :global(.RecommendationCard_recommendationCard__frontLeft .slick-slider),
+ :global(.RecommendationCard_recommendationCard__frontLeft .slick-list),
+ :global(.RecommendationCard_recommendationCard__frontLeft .slick-track){
+    height: 100%;
+ }
+ :global(.RecommendationCard_recommendationCard__frontLeft .slick-slide > div){
+    height: 100%;
+ }
 }
