@@ -152,4 +152,26 @@
     display: flex;
     flex: 1;
   }
+
+  .contentMap {
+    position: absolute;
+    width: calcSize(15030);
+    height: calcSize(8956);
+    left: calcSize(3961);
+    top: calcSize(1121);
+
+    .contentMap__recommendation {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .contentMap__recommendation h2 {
+      font-size: 2vw;
+      font-weight: 700;
+      color: #384054;
+      margin-bottom: 0.5vw;
+    }
+  }
 }
