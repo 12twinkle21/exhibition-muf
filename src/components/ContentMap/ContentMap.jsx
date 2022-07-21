@@ -1,13 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './ContentMap.module.scss';
 import Slider from "react-slick";
 import MapComponent from '../../components/MapComponent';
 import RecommendationCard from '../../components/RecommendationCard/RecommendationCard';
 import {useTranslation} from "react-i18next";
-
-// 1. Алгоритм центрования ++
-// 2. Дизайн боковых ++
-
 
 const SWIPER_SETTINGS = {
   dots: false,

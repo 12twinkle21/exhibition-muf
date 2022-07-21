@@ -20,13 +20,26 @@
   }
 
   :global(.ymaps-2-1-79-placemark-overlay){
-    background: red;
+    transform: scale(4);
+  }
+  :global(.ymaps-2-1-79-islets_circle-dot-icon-with-caption){
+    position: relative;
+    &:after{
+      content: '';
+      width: calcSize(50);
+      height: calcSize(50);
+      position: absolute;
+      transform: translate(-55%, -55%);
+      border-radius: calcSize(100);
+      background: white;
+    }
+  }
+  :global(.ymaps-2-1-79-svg-icon){
+    background: #315390;
+    border-radius: calcSize(10000);
   }
 
   :global(.ymaps-2-1-79-balloon) {
-    :global(.ymaps-2-1-79-balloon__layout) {
-    }
-
     :global(.ymaps-2-1-79-balloon__content) {
       padding: calcSize(200);
     }
@@ -35,9 +48,6 @@
       width: max-content !important;
       max-height: calcSize(4000);
       height: max-content !important;
-    }
-
-    :global(.ymaps-2-1-79-balloon__tail) {
     }
 
     :global(h3) {
@@ -96,7 +106,6 @@
         left: 0;
         height: calcSize(220);
         z-index: 100;
-        //background: url("../../../public/img/main_background.svg");
         background: url("../../../public/img/map_pin_adress.svg");
         background-size: contain;
       }
