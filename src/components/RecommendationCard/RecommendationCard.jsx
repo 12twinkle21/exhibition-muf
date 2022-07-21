@@ -25,7 +25,7 @@ function RecommendationCard(props) {
   };
 
   const formattedItems = useMemo(() => {
-    if(!items.sport_types_ru){
+    if (!items.sport_types_ru) {
       return []
     }
     return JSON.parse(items.sport_types_ru)
@@ -36,33 +36,34 @@ function RecommendationCard(props) {
     <div className={styles.recommendationCard}>
       {!visibleBackCard ?
         <div className={styles.recommendationCard__front}>
-          <div className={styles.recommendationCard__frontLeft}>
-          <Slider {...SWIPER_SETTINGS}>
-              {
-                sliderImgs?.length &&
-                sliderImgs.map((items, index) => (
-                  <img src={items}/>)
-                )
-              }
-            </Slider>
-            </div>
+          <div
+            className={styles.recommendationCard__frontLeft + ' ' + 'RecommendationCard_recommendationCard__frontLeft'}>
+            {/*<Slider {...SWIPER_SETTINGS}>*/}
+            {/*    {*/}
+            {/*      sliderImgs?.length &&*/}
+            {/*      sliderImgs.map((items, index) => (*/}
+            {/*        <img src={items}/>)*/}
+            {/*      )*/}
+            {/*    }*/}
+            {/*  </Slider>*/}
+          </div>
           <div className={styles.recommendationCard__frontRight} onClick={onVisibleBackCard}>
-          <div className={styles.recommendationCard__top}>
-            <div className={styles.recommendationCard__title}>
-              <h3>{items.name_ru}</h3>
-            </div>
-            <div className={styles.recommendationCard__sportList}>
-              <ul>
+            <div className={styles.recommendationCard__top}>
+              <div className={styles.recommendationCard__title}>
+                <h3>{items.name_ru}</h3>
+              </div>
+              <div className={styles.recommendationCard__sportList}>
+                <ul>
 
-                {
-                  formattedItems.map((sport) => <li key={`${sport}${items.id}`}>{sport}</li>)
-                }
-              </ul>
+                  {
+                    formattedItems.map((sport) => <li key={`${sport}${items.id}`}>{sport}</li>)
+                  }
+                </ul>
+              </div>
             </div>
-          </div>
-          <div className={styles.recommendationCard__address}>
-            <p>{items.address}</p>
-          </div>
+            <div className={styles.recommendationCard__address}>
+              <p>{items.address}</p>
+            </div>
           </div>
         </div>
         :

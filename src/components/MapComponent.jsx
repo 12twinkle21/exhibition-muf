@@ -12,16 +12,21 @@ function MapComponent(props) {
   return (
     <YMaps>
       <Map defaultState={MAP_SETTINGS} className='map'>
-        <Clusterer>
+        <Clusterer options={{preset: 'islands#invertedNightClusterIcons',}}>
           {mapMarks?.length && mapMarks.map((item) => {
             const currentMarkTags = JSON.parse(item.sport_type)
-            console.log(item)
+
             return (
               <Placemark key={item.id}
                          properties={{
                            balloonContent: PlacemarkBalloon({title: item.name, tags: currentMarkTags, address: '123'}),
+                           iconImageSize: [200, 200],
                          }}
                          options={{
+                           preset: 'islands#nightCircleDotIcon',
+                           iconColor: '#3b5998',
+                           imageSize: [200, 200],
+                           iconImageSize: [200, 200],
                            balloonOffset: [0, -30],
                            balloonCloseButton: false,
                            hideIconOnBalloonOpen: false,
@@ -44,7 +49,7 @@ export default MapComponent;
 
 const PlacemarkBalloon = (props) => {
   const {title, tags, address} = props
-  console.log(tags)
+
   return ` <h3 className="ballon__title">
         ${title}
       </h3>

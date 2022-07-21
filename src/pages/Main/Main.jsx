@@ -5,6 +5,12 @@ import {useTranslation} from "react-i18next";
 import LeftPanel from "../../components/LeftPanel/LeftPanel";
 import ContentMap from "../../components/ContentMap/ContentMap";
 
+// 1. Запрос данных - деталка рекомендаций ++
+// 2. Открытие деталки +
+// 3. Дизайн меток
+// 4. Дизайн карточек
+
+
 const DEFAULT_LANG_KEY = 'ru'
 
 const TRANSLATION_LANGUAGES = {
@@ -14,6 +20,7 @@ const TRANSLATION_LANGUAGES = {
 
 const ALL_OBJECTS_API_URL = 'https://exhibition-muf-maps.truemachine.space/api/objects'
 const RECOMENDED_API_URL = 'https://exhibition-muf-maps.truemachine.space/api/objects/recommended'
+const BASE_RECOMENDED_DETAILT_URL = 'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/'
 
 function Main() {
   const [langKey, setLangKey] = useState(DEFAULT_LANG_KEY)
@@ -221,11 +228,18 @@ function Main() {
     try {
       const recomendedResponse = await axios.get(RECOMENDED_API_URL)
       const allItemsFromResponse = recomendedResponse.data.data
-      setRecommendedItems(allItemsFromResponse.items)
+
+      const recomendedItemsDetailInfo = []
+      for await (const item of allItemsFromResponse.items){
+        const newDetailtData = await axios.get(`${BASE_RECOMENDED_DETAILT_URL}${item.id}`)
+        recomendedItemsDetailInfo.push(newDetailtData.data)
+      }
+      setRecommendedItems(recomendedItemsDetailInfo)
 
       const allObjectResponse = await axios.get(ALL_OBJECTS_API_URL)
       const allObjectFromResponse = allObjectResponse.data.data
       setAllObjects(allObjectFromResponse.items)
+
     } catch (error) {
       alert('Ошибка при запросе данных ;(');
       console.error(error);
@@ -311,7 +325,8 @@ function Main() {
         />
         <ContentMap
           recommendedItems={filtredRecommendedItems}
-          allObjects={filtredAllObjects}/>
+          allObjects={filtredAllObjects}
+        />
       </div>
     </div>
   )

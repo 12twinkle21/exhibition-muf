@@ -12,8 +12,26 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding-left: 3%;
-    padding-bottom: 7%;
+    //padding-left: 3%;
+    //padding-bottom: 7%;
+
+    :global(.slick-arrow){
+      width: calcSize(500);
+      height: calcSize(500);
+      background: rebeccapurple;
+    }
+    :global(.slick-track){
+      min-width: max-content;
+    }
+    :global(.slick-slide) {
+      transition: transform 0.3s, width 0.3s;
+    }
+    :global(.slick-center){
+      transform: scale(1.1) !important;
+    }
+    :global(.slick-active:not(.slick-center)){
+      transform: scale(0.9);
+    }
   }
 
   .contentMap__recommendation h2 {
