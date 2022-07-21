@@ -53,7 +53,7 @@ function LeftPanel(props) {
       </div>
       <div className={styles.leftFloatMenu__sportsTagsScrollContainer}>
       <div className={styles.leftFloatMenu__sportsTags}>
-        {
+        {sportsTags.length &&
           sportsTags.map(sportTag => (
               <div key={sportTag.id}
                    onClick={() => handleSportTagClick(sportTag.id)}
@@ -72,9 +72,12 @@ function LeftPanel(props) {
         <h3>{t('searchResultTitle')}</h3>
         <div className={styles.leftFloatMenu__resultsItemsScrollContainer}>
           <div className={styles.leftFloatMenu__resultsItems}>
-            {searchResults?.length && (
-              searchResults.map(item => <span key={item.id}>{item.name}</span>)
-            )}
+            {searchResults?.length
+              ? (
+                searchResults.map(item => <span key={item.id}>{item.name}</span>)
+              )
+              : ''
+            }
           </div>
         </div>
       </div>

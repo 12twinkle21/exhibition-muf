@@ -13,7 +13,8 @@ function MapComponent(props) {
     <YMaps>
       <Map defaultState={MAP_SETTINGS} className='map'>
         <Clusterer options={{preset: 'islands#invertedNightClusterIcons',}}>
-          {mapMarks?.length && mapMarks.map((item) => {
+          {mapMarks?.length
+            ? mapMarks.map((item) => {
             const currentMarkTags = JSON.parse(item.sport_type)
 
             return (
@@ -38,6 +39,7 @@ function MapComponent(props) {
               />
             )
           })
+            : ''
           }
         </Clusterer>
       </Map>

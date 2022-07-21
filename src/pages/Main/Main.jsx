@@ -5,12 +5,6 @@ import {useTranslation} from "react-i18next";
 import LeftPanel from "../../components/LeftPanel/LeftPanel";
 import ContentMap from "../../components/ContentMap/ContentMap";
 
-// 1. Запрос данных - деталка рекомендаций ++
-// 2. Открытие деталки +
-// 3. Дизайн меток
-// 4. Дизайн карточек
-
-
 const DEFAULT_LANG_KEY = 'ru'
 
 const TRANSLATION_LANGUAGES = {
@@ -261,7 +255,7 @@ function Main() {
         item.name_ru.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-    if (activeSportTagIds.length) {
+    if (activeSportTagIds?.length) {
       const filteredTags = sportsTags.filter(sportTag => activeSportTagIds.some(activeTag => activeTag === sportTag.id))
       const tagsRuNames = {}
       if(!filteredTags.length){
@@ -285,7 +279,7 @@ function Main() {
         item.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-    if (activeSportTagIds.length) {
+    if (activeSportTagIds?.length) {
       const filteredTags = sportsTags.filter(sportTag => activeSportTagIds.some(activeTag => activeTag === sportTag.id))
       const tagsRuNames = {}
       if(!filteredTags.length){

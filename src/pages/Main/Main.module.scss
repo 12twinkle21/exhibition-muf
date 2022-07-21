@@ -34,6 +34,9 @@
       background: white;
     }
   }
+  :global(.ymaps-2-1-79-copyrights-pane){
+    display: none;
+  }
   :global(.ymaps-2-1-79-svg-icon){
     background: #315390;
     border-radius: calcSize(10000);
@@ -48,6 +51,9 @@
       width: max-content !important;
       max-height: calcSize(4000);
       height: max-content !important;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
 
     :global(h3) {

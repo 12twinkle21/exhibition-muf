@@ -35,29 +35,28 @@ function RecommendationCard(props) {
 
     <div className={styles.recommendationCard}>
       {!visibleBackCard ?
-        <div className={styles.recommendationCard__front}>
+        <div className={styles.recommendationCard__front + ' ' + 'recommendationCard__front'}>
           <div
             className={styles.recommendationCard__frontLeft + ' ' + 'RecommendationCard_recommendationCard__frontLeft'}>
              <Slider {...SWIPER_SETTINGS} className={styles.innerSlider}>
               {
                   sliderImgs?.length &&
-                 sliderImgs.map((items, index) => (
-                   <img src={items}/>)
+                 sliderImgs.map((item,) => (
+                   <img key={`${items.id}${item}`} src={item}/>)
                  )
                }
-             </Slider> 
+             </Slider>
 
           </div>
-          <div className={styles.recommendationCard__frontRight} onClick={onVisibleBackCard}>
+          <div className={styles.recommendationCard__frontRight + ' ' + 'recommendationCard__frontRight'} onClick={onVisibleBackCard}>
             <div className={styles.recommendationCard__top}>
               <div className={styles.recommendationCard__title}>
                 <h3>{items.name_ru}</h3>
               </div>
               <div className={styles.recommendationCard__sportList}>
                 <ul>
-
                   {
-                    formattedItems.map((sport) => <li key={`${sport}${items.id}`}><svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    formattedItems.map((sport) => <li key={`${items.id}${sport}`}><svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M125 90L55 50V130L125 90Z" fill="white"/>
                     </svg>{sport}</li>)
                   }
