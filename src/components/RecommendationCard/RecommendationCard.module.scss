@@ -5,23 +5,28 @@
 
    .recommendationCard__front{
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
       background-color:#384054;
-      padding: 1vw;
-      border-radius: 1vw;
       color: #fff;
-      padding-top: 0.5vw;
       position: relative;
+      display: flex;
+      
+      .recommendationCard__frontLeft{
+         width: 50%;
+         
+         img{
+            width: 100%;
+            height: 100%;
+         }
+      }
 
-      img{
-         position: absolute;
-         top: 50%;
-         right: 0;
-         transform: translateY(-50%);
-         width: 6vw;
-         height: 6vw;
+      .recommendationCard__frontRight{
+         width: 50%;
+         height: 100%;
+         display: flex;
+         flex-direction: column;
+         justify-content: space-between;
+         padding: 1vw;
+         padding-top: 0.5vw;
       }
 
       .recommendationCard__title h3{
@@ -68,4 +73,6 @@
       font-size: 0.6vw;
       font-weight: 400;
    }
+   
 }
+

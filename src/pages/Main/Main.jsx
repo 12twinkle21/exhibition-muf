@@ -34,11 +34,11 @@ export function useDebounce(value, delay) {
 }
 
 const SWIPER_SETTINGS = {
-  dots: true,
+  dots: false,
   infinite: false,
-  arrows: false,
+  arrows: true,
   swipeToSlide: true,
-  swipe: true,
+  swipe: false,
   speed: 500,
   slidesToShow: 3,
   slidesToScroll: 1
@@ -50,7 +50,8 @@ function Main() {
 
   const [recommendedItems, setRecommendedItems] = useState();
   const [mapItems, setMapItems] = useState([]);
-
+  // const [recommendedDetail, setRecommendedDetail] = useState();
+  
   async function fetchData() {
     try {
       await axios.get(RECOMENDED_API_URL).then((response) => {
@@ -62,7 +63,33 @@ function Main() {
         const mapPersons = resp.data.data;
         setMapItems(mapPersons.items);
       });
+      // const recommendedDetailUrls = [
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/1',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/2',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/3',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/4',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/5',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/6',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/7',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/8',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/9',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/10',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/11',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/12',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/13',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/14',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/15',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/16',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/17',
+      //   'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/18'
+      // ]
 
+      // axios.all(recommendedDetailUrls.map((endpoint) => axios.get(endpoint))).then(
+      //   (resp) => {
+      //     const recommendedDetailPersons = resp.data.data;
+      //     setRecommendedDetail(recommendedDetailPersons);
+      //   });
+     
     } catch (error) {
       alert('Ошибка при запросе данных ;(');
       console.error(error);
@@ -72,8 +99,7 @@ function Main() {
   useEffect(() => {
     fetchData();
   }, []);
-
-
+  
   const sportsTag = useMemo(() => {
     return [
       {id: 'id--Хоккей', viewName: t('leftMenu.tags.hockey')},
@@ -95,7 +121,7 @@ function Main() {
 
   const [activeSportTagId, setActiveSportTagId] = useState(null)
 
-  const RECOMENDED_API_URL = 'https://exhibition-muf-maps.truemachine.space/api/objects'
+  const RECOMENDED_API_URL = 'https://exhibition-muf-maps.truemachine.space/api/objects/recommended'
 
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -182,7 +208,7 @@ function Main() {
           </div>
         </div>
         <div className={styles.contentMap}>
-          <MapComponent mapMarks={mapItems}/>
+          {/* <MapComponent mapMarks={mapItems}/> */}
           <div className={styles.contentMap__recommendation}>
             <h2>{t('map.recomendationTitle')}</h2>
             <Slider {...SWIPER_SETTINGS}>
