@@ -18,6 +18,7 @@ const BASE_RECOMENDED_DETAILT_URL = 'https://exhibition-muf-maps.truemachine.spa
 
 function Main() {
   const [langKey, setLangKey] = useState(DEFAULT_LANG_KEY)
+
   function changeLanguage() {
     if (langKey === 'ru') {
       setLangKey('en')
@@ -25,6 +26,7 @@ function Main() {
     }
     setLangKey('ru')
   }
+
   useEffect(() => {
     i18n.changeLanguage(langKey)
   }, [langKey])
@@ -54,7 +56,11 @@ function Main() {
       {id: 'id--volleyball', viewName: t('leftMenu.tags.volleyball'), ru: 'Волейбол'},
       {id: 'id--fencing', viewName: t('leftMenu.tags.fencing'), ru: 'Фехтование'},
       {id: 'id--fight', viewName: t('leftMenu.tags.fight'), ru: 'Борьба'},
-      {id: 'id--acrobatic_rock_n_roll', viewName: t('leftMenu.tags.acrobatic_rock_n_roll'), ru: 'Акробатический рок-н-ролл'},
+      {
+        id: 'id--acrobatic_rock_n_roll',
+        viewName: t('leftMenu.tags.acrobatic_rock_n_roll'),
+        ru: 'Акробатический рок-н-ролл'
+      },
       {id: 'id--sports_dances', viewName: t('leftMenu.tags.sports_dances'), ru: 'Спортивные танцы'},
       {id: 'id--mini_football', viewName: t('leftMenu.tags.mini_football'), ru: 'Мини-футбол'},
       {id: 'id--waterpark', viewName: t('leftMenu.tags.waterpark'), ru: 'Аквапарк'},
@@ -77,7 +83,11 @@ function Main() {
       {id: 'id--sports_acrobatics', viewName: t('leftMenu.tags.sports_acrobatics'), ru: 'Спортивная акробатика'},
       {id: 'id--fitness', viewName: t('leftMenu.tags.fitness'), ru: 'Фитнес'},
       {id: 'id--triathlon', viewName: t('leftMenu.tags.triathlon'), ru: 'Триатлон'},
-      {id: 'id--general_physical_and_strength_training', viewName: t('leftMenu.tags.general_physical_and_strength_training'), ru: 'Общая'},
+      {
+        id: 'id--general_physical_and_strength_training',
+        viewName: t('leftMenu.tags.general_physical_and_strength_training'),
+        ru: 'Общая'
+      },
       {id: 'id--gym', viewName: t('leftMenu.tags.gym'), ru: 'Тренажерный зал'},
       {id: 'id--pool', viewName: t('leftMenu.tags.pool'), ru: 'Бассейн'},
       {id: 'id--handball', viewName: t('leftMenu.tags.handball'), ru: 'Гандбол'},
@@ -94,10 +104,18 @@ function Main() {
       {id: 'id--shooting', viewName: t('leftMenu.tags.shooting'), ru: 'Стрельба'},
       {id: 'id--equestrian_arena', viewName: t('leftMenu.tags.equestrian_arena'), ru: 'Конно-спортивный манеж'},
       {id: 'id--steeplechase', viewName: t('leftMenu.tags.steeplechase'), ru: 'Бег с препятствиями'},
-      {id: 'id--long_jump_high_jump_triple_jump', viewName: t('leftMenu.tags.long_jump_high_jump_triple_jump'), ru: 'Прыжки в длину,'},
+      {
+        id: 'id--long_jump_high_jump_triple_jump',
+        viewName: t('leftMenu.tags.long_jump_high_jump_triple_jump'),
+        ru: 'Прыжки в длину,'
+      },
       {id: 'id--pole_vault', viewName: t('leftMenu.tags.pole_vault'), ru: 'Прыжок с шестом'},
       {id: 'id--shot_put', viewName: t('leftMenu.tags.shot_put'), ru: 'Толкание ядра'},
-      {id: 'id--general_physical_training', viewName: t('leftMenu.tags.general_physical_training'), ru: 'Общая физическая'},
+      {
+        id: 'id--general_physical_training',
+        viewName: t('leftMenu.tags.general_physical_training'),
+        ru: 'Общая физическая'
+      },
       {id: 'id--fitness_aerobics', viewName: t('leftMenu.tags.fitness_aerobics'), ru: 'Фитнес-аэробика'},
       {id: 'id--cross_country_skiing', viewName: t('leftMenu.tags.cross_country_skiing'), ru: 'Лыжный спорт'},
       {id: 'id--skating', viewName: t('leftMenu.tags.skating'), ru: 'Катание на коньках'},
@@ -106,8 +124,16 @@ function Main() {
       {id: 'id--arm_wrestling', viewName: t('leftMenu.tags.arm_wrestling'), ru: 'Армрестлинг'},
       {id: 'id--powerlifting', viewName: t('leftMenu.tags.powerlifting'), ru: 'Пауэрлифтинг'},
       {id: 'id--dance_sport', viewName: t('leftMenu.tags.dance_sport'), ru: 'Танцевальный спорт'},
-      {id: 'id--aesthetic_gymnastics', viewName: t('leftMenu.tags.aesthetic_gymnastics'), ru: 'Эстетическая гимнастика'},
-      {id: 'id--improving_gymnastics', viewName: t('leftMenu.tags.improving_gymnastics'), ru: 'Оздоровительная гимнастика'},
+      {
+        id: 'id--aesthetic_gymnastics',
+        viewName: t('leftMenu.tags.aesthetic_gymnastics'),
+        ru: 'Эстетическая гимнастика'
+      },
+      {
+        id: 'id--improving_gymnastics',
+        viewName: t('leftMenu.tags.improving_gymnastics'),
+        ru: 'Оздоровительная гимнастика'
+      },
       {id: 'id--judo', viewName: t('leftMenu.tags.judo'), ru: 'Дзюдо'},
       {id: 'id--ski_combined', viewName: t('leftMenu.tags.ski_combined'), ru: 'Лыжное двоеборье'},
       {id: 'id--snowboard', viewName: t('leftMenu.tags.snowboard'), ru: 'Сноуборд'},
@@ -129,14 +155,30 @@ function Main() {
       {id: 'id--aerobics', viewName: t('leftMenu.tags.aerobics'), ru: 'Аэробика'},
       {id: 'id--figure_skating', viewName: t('leftMenu.tags.figure_skating'), ru: 'Фигурное катание на коньках'},
       {id: 'id--urban_sports', viewName: t('leftMenu.tags.urban_sports'), ru: 'Городской спорт'},
-      {id: 'id--shooting_from_a_crossbow', viewName: t('leftMenu.tags.shooting_from_a_crossbow'), ru: 'Стрельба из арбалета'},
+      {
+        id: 'id--shooting_from_a_crossbow',
+        viewName: t('leftMenu.tags.shooting_from_a_crossbow'),
+        ru: 'Стрельба из арбалета'
+      },
       {id: 'id--sports_tourism', viewName: t('leftMenu.tags.sports_tourism'), ru: 'Спортивный туризм'},
       {id: 'id--floorbal', viewName: t('leftMenu.tags.floorbal'), ru: 'Флорбол'},
       {id: 'id--motor_sport', viewName: t('leftMenu.tags.motor_sport'), ru: 'Автомобильный спорт'},
-      {id: 'id--cycling_mountain_biking', viewName: t('leftMenu.tags.cycling_mountain_biking'), ru: 'Велосипедный спорт - ВМХ'},
+      {
+        id: 'id--cycling_mountain_biking',
+        viewName: t('leftMenu.tags.cycling_mountain_biking'),
+        ru: 'Велосипедный спорт - ВМХ'
+      },
       {id: 'id--polyathlon', viewName: t('leftMenu.tags.polyathlon'), ru: 'Полиатлон'},
-      {id: 'id--shooting_from_regular_or_service_weapons', viewName: t('leftMenu.tags.shooting_from_regular_or_service_weapons'), ru: 'Стрельба из штатного или табельного оружия'},
-      {id: 'id--shooting_from_combat_handguns', viewName: t('leftMenu.tags.shooting_from_combat_handguns'), ru: 'Стрельба из боевого ручного стрелкового оружия'},
+      {
+        id: 'id--shooting_from_regular_or_service_weapons',
+        viewName: t('leftMenu.tags.shooting_from_regular_or_service_weapons'),
+        ru: 'Стрельба из штатного или табельного оружия'
+      },
+      {
+        id: 'id--shooting_from_combat_handguns',
+        viewName: t('leftMenu.tags.shooting_from_combat_handguns'),
+        ru: 'Стрельба из боевого ручного стрелкового оружия'
+      },
       {id: 'id--archery', viewName: t('leftMenu.tags.archery'), ru: 'Стрельба из лука'},
       {id: 'id--skiing', viewName: t('leftMenu.tags.skiing'), ru: 'Лыжный спорт'},
       {id: 'id--checkers', viewName: t('leftMenu.tags.checkers'), ru: 'Шашки'},
@@ -148,7 +190,11 @@ function Main() {
       {id: 'id--rowing', viewName: t('leftMenu.tags.rowing'), ru: 'Гребной спорт'},
       {id: 'id--sailing', viewName: t('leftMenu.tags.sailing'), ru: 'Парусный спорт'},
       {id: 'id--rowing_slalom', viewName: t('leftMenu.tags.rowing_slalom'), ru: 'Гребной слалом'},
-      {id: 'id--kayaking_and_canoeing', viewName: t('leftMenu.tags.kayaking_and_canoeing'), ru: 'Гребля на байдарках и каноэ'},
+      {
+        id: 'id--kayaking_and_canoeing',
+        viewName: t('leftMenu.tags.kayaking_and_canoeing'),
+        ru: 'Гребля на байдарках и каноэ'
+      },
       {id: 'id--waterskiing', viewName: t('leftMenu.tags.waterskiing'), ru: 'Воднолыжный спорт'},
       {id: 'id--armlifting', viewName: t('leftMenu.tags.armlifting'), ru: 'Армлифтинг'},
       {id: 'id--gymnastics', viewName: t('leftMenu.tags.gymnastics'), ru: 'Гимнастика'},
@@ -158,7 +204,11 @@ function Main() {
       {id: 'id--bandy', viewName: t('leftMenu.tags.bandy'), ru: 'Хоккей с мячом'},
       {id: 'id--sports_aerobics', viewName: t('leftMenu.tags.sports_aerobics'), ru: 'Спортивная аэробика'},
       {id: 'id--football_freestyle', viewName: t('leftMenu.tags.football_freestyle'), ru: 'Футбольный фристайл'},
-      {id: 'id--oriental_martial_arts', viewName: t('leftMenu.tags.oriental_martial_arts'), ru: 'Восточные единоборства'},
+      {
+        id: 'id--oriental_martial_arts',
+        viewName: t('leftMenu.tags.oriental_martial_arts'),
+        ru: 'Восточные единоборства'
+      },
       {id: 'id--kettlebell_zifting', viewName: t('leftMenu.tags.kettlebell_zifting'), ru: 'Гиревой спорт'},
       {id: 'id--mixed_martial_arts', viewName: t('leftMenu.tags.mixed_martial_arts'), ru: 'Смешанные боевые искусства'},
       {id: 'id--hand_to_hand_fight', viewName: t('leftMenu.tags.hand_to_hand_fight'), ru: 'Рукопашный бой'},
@@ -167,7 +217,11 @@ function Main() {
       {id: 'id--mountaineering', viewName: t('leftMenu.tags.mountaineering'), ru: 'Альпинизм'},
       {id: 'id--practical_shooting', viewName: t('leftMenu.tags.practical_shooting'), ru: 'Практическая стрельба'},
       {id: 'id--billiard_sport', viewName: t('leftMenu.tags.billiard_sport'), ru: 'Бильярдный спорт'},
-      {id: 'id--army_hand_to_hand_combat', viewName: t('leftMenu.tags.army_hand_to_hand_combat'), ru: 'Армейский рукопашный'},
+      {
+        id: 'id--army_hand_to_hand_combat',
+        viewName: t('leftMenu.tags.army_hand_to_hand_combat'),
+        ru: 'Армейский рукопашный'
+      },
       {id: 'id--mini_golf', viewName: t('leftMenu.tags.mini_golf'), ru: 'Мини-гольф'},
       {id: 'id--underwater', viewName: t('leftMenu.tags.underwater'), ru: 'Подводный спорт'},
       {id: 'id--water_pol', viewName: t('leftMenu.tags.water_pol'), ru: 'Водное поло'},
@@ -181,21 +235,37 @@ function Main() {
       {id: 'id--belt_wrestling', viewName: t('leftMenu.tags.belt_wrestling'), ru: 'Борьба на поясах'},
       {id: 'id--chir_sport', viewName: t('leftMenu.tags.chir_sport'), ru: 'Чир спорт'},
       {id: 'id--nordic_walking', viewName: t('leftMenu.tags.nordic_walking'), ru: 'Скандинавская ходьба'},
-      {id: 'id--rowing_and_sailing_combined', viewName: t('leftMenu.tags.rowing_and_sailing_combined'), ru: 'Гребно-парусное'},
+      {
+        id: 'id--rowing_and_sailing_combined',
+        viewName: t('leftMenu.tags.rowing_and_sailing_combined'),
+        ru: 'Гребно-парусное'
+      },
       {id: 'id--zumba', viewName: t('leftMenu.tags.zumba'), ru: 'Зумба'},
       {id: 'id--american_football', viewName: t('leftMenu.tags.american_football'), ru: 'Американский футбол'},
-      {id: 'id--shooting_from_electronic_weapons', viewName: t('leftMenu.tags.shooting_from_electronic_weapons'), ru: 'Стрельба из'},
+      {
+        id: 'id--shooting_from_electronic_weapons',
+        viewName: t('leftMenu.tags.shooting_from_electronic_weapons'),
+        ru: 'Стрельба из'
+      },
       {id: 'id--skeet_shooting', viewName: t('leftMenu.tags.skeet_shooting'), ru: 'Стендовая стрельба'},
       {id: 'id--sports_of_the_Deaf', viewName: t('leftMenu.tags.sports_of_the_Deaf'), ru: 'Спорт глухих'},
       {id: 'id--cycling_highway', viewName: t('leftMenu.tags.cycling_highway'), ru: 'Велоспорт - шоссе'},
       {id: 'id--cycling_track', viewName: t('leftMenu.tags.cycling_track'), ru: 'Велоспорт - трек'},
-      {id: 'id--sports_of_persons_with_oda_impairment', viewName: t('leftMenu.tags.sports_of_persons_with_oda_impairment'), ru: 'Спорт лиц'},
+      {
+        id: 'id--sports_of_persons_with_oda_impairment',
+        viewName: t('leftMenu.tags.sports_of_persons_with_oda_impairment'),
+        ru: 'Спорт лиц'
+      },
       {id: 'id--field_hocke', viewName: t('leftMenu.tags.field_hocke'), ru: 'Хоккей на траве'},
       {id: 'id--kyokushin', viewName: t('leftMenu.tags.kyokushin'), ru: 'Киокусинкай'},
       {id: 'id--sumo', viewName: t('leftMenu.tags.sumo'), ru: 'Сумо'},
       {id: 'id--softball', viewName: t('leftMenu.tags.softball'), ru: 'Софтбол'},
       {id: 'id--baseball', viewName: t('leftMenu.tags.baseball'), ru: 'Бейсбол'},
-      {id: 'id--sports_for_persons_with_disabilities_of_all_categories', viewName: t('leftMenu.tags.sports_for_persons_with_disabilities_of_all_categories'), ru: 'Спорт для лиц с ограниченными возможностями здоровья всех категорий'},
+      {
+        id: 'id--sports_for_persons_with_disabilities_of_all_categories',
+        viewName: t('leftMenu.tags.sports_for_persons_with_disabilities_of_all_categories'),
+        ru: 'Спорт для лиц с ограниченными возможностями здоровья всех категорий'
+      },
       {id: 'id--boccia', viewName: t('leftMenu.tags.boccia'), ru: 'Бочча'},
       {id: 'id--modern_pentathlon', viewName: t('leftMenu.tags.modern_pentathlon'), ru: 'Современное пятиборье'},
       {id: 'id--all_style_karate', viewName: t('leftMenu.tags.all_style_karate'), ru: 'Всестилевое каратэ'},
@@ -211,7 +281,7 @@ function Main() {
       {id: 'id--sports_of_the_blind', viewName: t('leftMenu.tags.sports_of_the_blind'), ru: 'Спорт слепых'},
     ];
   }, [t])
-  const [activeSportTagIds, setActiveSportTagIds] = useState(null) // null || [id--Хоккей]
+  const [activeSportTagIds, setActiveSportTagIds] = useState(['id--football', 'id--hockey', 'id--athletics']) // null || [id--Хоккей]
 
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -224,7 +294,7 @@ function Main() {
       const allItemsFromResponse = recomendedResponse.data.data
 
       const recomendedItemsDetailInfo = []
-      for await (const item of allItemsFromResponse.items){
+      for await (const item of allItemsFromResponse.items) {
         const newDetailtData = await axios.get(`${BASE_RECOMENDED_DETAILT_URL}${item.id}`)
         recomendedItemsDetailInfo.push(newDetailtData.data)
       }
@@ -239,10 +309,12 @@ function Main() {
       console.error(error);
     }
   }
+
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(recommendedItems)
+
+
   const filtredRecommendedItems = useMemo(() => {
     if (!debouncedSearchTerm && !activeSportTagIds?.length) {
       return recommendedItems
@@ -258,7 +330,7 @@ function Main() {
     if (activeSportTagIds?.length) {
       const filteredTags = sportsTags.filter(sportTag => activeSportTagIds.some(activeTag => activeTag === sportTag.id))
       const tagsRuNames = {}
-      if(!filteredTags.length){
+      if (!filteredTags.length) {
         return returnedItems
       }
       filteredTags.forEach((filterTag => tagsRuNames[filterTag.ru] = true))
@@ -270,7 +342,7 @@ function Main() {
   }, [debouncedSearchTerm, activeSportTagIds, recommendedItems])
   const filtredAllObjects = useMemo(() => {
     if (!debouncedSearchTerm && !activeSportTagIds?.length) {
-      return allObjects[0] ? [allObjects[0], allObjects[1], allObjects[2], allObjects[3], allObjects[4], allObjects[5], allObjects[6]] : []
+      return allObjects
     }
     let returnedItems = [...allObjects]
     if (debouncedSearchTerm) {
@@ -282,7 +354,7 @@ function Main() {
     if (activeSportTagIds?.length) {
       const filteredTags = sportsTags.filter(sportTag => activeSportTagIds.some(activeTag => activeTag === sportTag.id))
       const tagsRuNames = {}
-      if(!filteredTags.length){
+      if (!filteredTags.length) {
         return returnedItems
       }
       filteredTags.forEach((filterTag => tagsRuNames[filterTag.ru] = true))
