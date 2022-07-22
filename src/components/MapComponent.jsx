@@ -55,7 +55,7 @@ const PlacemarkBalloon = (props) => {
   return ` <h3 className="ballon__title">
         ${title}
       </h3>
-      <main className="ballon__tags" onClick="console.log(0)">
+      <main className="ballon__tags">
         ${tags.map(tagName => `<span key={tagName}>${tagName}</span>`).join(' ')}
       </main>
       <aside className="ballon__address">

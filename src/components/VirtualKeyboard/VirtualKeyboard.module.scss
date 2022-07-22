@@ -76,7 +76,7 @@
         left: 30%;
         content: "";
         width: 40%;
-        height: 30px;
+        height: calcSize(30);
         transform: rotate(135deg);
         background: white;
       }
@@ -87,7 +87,7 @@
         left: 30%;
         content: "";
         width: 40%;
-        height: 30px;
+        height: calcSize(30);
         transform: rotate(45deg);
         background: white;
       }
