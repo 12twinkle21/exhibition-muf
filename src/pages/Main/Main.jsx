@@ -35,7 +35,6 @@ function Main() {
   const [recommendedItems, setRecommendedItems] = useState([]);
   const [allObjects, setAllObjects] = useState([]);
 
-
   const sportsTags = useMemo(() => {
     return [
       {id: 'id--football', viewName: t('leftMenu.tags.football'), ru: 'Футбол'},
@@ -242,7 +241,7 @@ function Main() {
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(recommendedItems)
+  
   const filtredRecommendedItems = useMemo(() => {
     if (!debouncedSearchTerm && !activeSportTagIds?.length) {
       return recommendedItems

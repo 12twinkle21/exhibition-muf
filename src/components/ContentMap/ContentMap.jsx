@@ -8,7 +8,7 @@ import {useTranslation} from "react-i18next";
 function ContentMap(props) {
   const {allObjects, recommendedItems} = props
   const sliderContainer = useRef()
-
+  
   const SWIPER_SETTINGS = {
     dots: false,
     arrows: true,

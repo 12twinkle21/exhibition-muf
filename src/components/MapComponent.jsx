@@ -20,7 +20,7 @@ function MapComponent(props) {
             return (
               <Placemark key={item.id}
                          properties={{
-                           balloonContent: PlacemarkBalloon({title: item.name, tags: currentMarkTags, address: '123'}),
+                           balloonContent: PlacemarkBalloon({title: item.name, tags: currentMarkTags, address: item.address}),
                            iconImageSize: [200, 200],
                          }}
                          options={{
@@ -51,7 +51,7 @@ export default MapComponent;
 
 const PlacemarkBalloon = (props) => {
   const {title, tags, address} = props
-
+  console.log(props)
   return ` <h3 className="ballon__title">
         ${title}
       </h3>
@@ -59,6 +59,6 @@ const PlacemarkBalloon = (props) => {
         ${tags.map(tagName => `<span key={tagName}>${tagName}</span>`).join(' ')}
       </main>
       <aside className="ballon__address">
-        <div>Автозаводская ул., 23А</div>
+        <div>${address}</div>
       </aside>`
 }
