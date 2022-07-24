@@ -282,7 +282,7 @@ function Main() {
   }, [t])
   const [activeSportTagIds, setActiveSportTagIds] = useState(['id--football',
     'id--hockey',
-    'id--boxing', 'id--skating', 'id--motor_sport']) // null || [id--Хоккей]
+    'id--boxing']) // null || [id--Хоккей]
 
 
   async function fetchData() {

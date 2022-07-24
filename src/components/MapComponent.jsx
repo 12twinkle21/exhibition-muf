@@ -14,14 +14,14 @@ function MapComponent(props) {
 
   useEffect(() => {
     if (!mapRef || !mapMarks?.length || !clusterRef) {
-      mapRef.balloon.close()
+      mapRef?.balloon?.close()
       return
     }
     const firstMark = mapMarks[0]
     const allPlacemarkNodes = clusterRef.getGeoObjects()
     const firstPlacemarkNode = allPlacemarkNodes[0]
     if (!firstMark || !allPlacemarkNodes?.length || !firstPlacemarkNode || allPlacemarkNodes.length !== mapMarks.length) {
-      mapRef.balloon.close()
+      mapRef?.balloon?.close()
       return;
     }
     const currentMarkTags = JSON.parse(firstMark.sport_type)
