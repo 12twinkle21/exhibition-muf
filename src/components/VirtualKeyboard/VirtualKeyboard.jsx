@@ -29,9 +29,6 @@ export const VirtualKeyboard = (props) => {
       return
     }
     if (buttonKey === CLOSE_KEY) {
-      setInputText('')
-      onChangeFromProps('')
-      keyboard?.current.clearInput()
       toggleShowKeyboard()
       return;
     }

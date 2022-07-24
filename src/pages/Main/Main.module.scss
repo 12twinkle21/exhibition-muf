@@ -19,9 +19,6 @@
     -o-filter: grayscale(1);
   }
 
-  :global(.ymaps-2-1-79-placemark-overlay){
-    transform: scale(4);
-  }
   :global(.ymaps-2-1-79-islets_circle-dot-icon-with-caption){
     position: relative;
     &:after{

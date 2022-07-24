@@ -3,7 +3,6 @@ import styles from './ContentMap.module.scss';
 import Slider from "react-slick";
 import MapComponent from '../../components/MapComponent';
 import RecommendationCard from '../../components/RecommendationCard/RecommendationCard';
-import {useTranslation} from "react-i18next";
 
 function ContentMap(props) {
   const {allObjects, recommendedItems} = props
@@ -34,7 +33,6 @@ function ContentMap(props) {
             }
           </Slider>
         </div>
-
         : ''
       }
     </div>

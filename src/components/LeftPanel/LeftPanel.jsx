@@ -2,34 +2,32 @@ import React, {useEffect, useState} from 'react';
 import {VirtualKeyboard} from "../VirtualKeyboard/VirtualKeyboard";
 import {useTranslation} from "react-i18next";
 import styles from './LeftPanel.module.scss';
+import {useDebounce} from "../../pages/Main/Main";
 
 function LeftPanel(props) {
   const {
-    allObjects,
-    searchTerm,
-    setSearchTerm,
     activeSportTagIds,
     setActiveSportTagIds,
     langKey,
     sportsTags,
-    debouncedSearchTerm
   } = props
   const {t} = useTranslation();
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 1500);
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(
     () => {
       if (debouncedSearchTerm) {
-        setSearchResults(allObjects.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase())));
-
+        setSearchResults(sportsTags.filter((item) => item.viewName.toLowerCase().includes(searchTerm.toLowerCase()) || item.ru.toLowerCase().includes(searchTerm.toLowerCase()) || activeSportTagIds.includes(item.id)));
       } else if (searchTerm) {
         setSearchResults([]);
       } else {
-        setSearchResults(allObjects);
+        setSearchResults(sportsTags);
       }
     },
-    [debouncedSearchTerm, allObjects]
+    [debouncedSearchTerm, sportsTags]
   );
 
   function handleSportTagClick(newTagId) {
@@ -53,8 +51,8 @@ function LeftPanel(props) {
       </div>
       <div className={styles.leftFloatMenu__sportsTagsScrollContainer}>
       <div className={styles.leftFloatMenu__sportsTags}>
-        {sportsTags.length &&
-          sportsTags.map(sportTag => (
+        {searchResults.length &&
+          searchResults.map(sportTag => (
               <div key={sportTag.id}
                    onClick={() => handleSportTagClick(sportTag.id)}
                    className={
@@ -67,19 +65,6 @@ function LeftPanel(props) {
           )
         }
       </div>
-      </div>
-      <div className={styles.leftFloatMenu__resultsContainer}>
-        <h3>{t('searchResultTitle')}</h3>
-        <div className={styles.leftFloatMenu__resultsItemsScrollContainer}>
-          <div className={styles.leftFloatMenu__resultsItems}>
-            {searchResults?.length
-              ? (
-                searchResults.map(item => <span key={item.id}>{item.name}</span>)
-              )
-              : ''
-            }
-          </div>
-        </div>
       </div>
     </div>
   )

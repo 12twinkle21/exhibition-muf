@@ -92,6 +92,70 @@
         background: white;
       }
     }
+    :global(.hg-button[data-skbtn="{enter}"]){
+      font-size: 0;
+      position: relative;
+      background: #9D2030;
+      transition: background 0.3s;
+
+      &:active{
+        background: white;
+        color: black;
+      }
+      &::before{
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        content: "";
+        width: 40%;
+        height: calcSize(30);
+        transform: rotate(135deg);
+        background: white;
+      }
+
+      &::after{
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        content: "";
+        width: 40%;
+        height: calcSize(30);
+        transform: rotate(45deg);
+        background: white;
+      }
+    }
+    :global(.hg-button[data-skbtn="{bksp}"]){
+      font-size: 0;
+      position: relative;
+      background: #9D2030;
+      transition: background 0.3s;
+
+      &:active{
+        background: white;
+        color: black;
+      }
+      &::before{
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        content: "";
+        width: 40%;
+        height: calcSize(30);
+        transform: rotate(135deg);
+        background: white;
+      }
+
+      &::after{
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        content: "";
+        width: 40%;
+        height: calcSize(30);
+        transform: rotate(45deg);
+        background: white;
+      }
+    }
   }
 
   & .input{

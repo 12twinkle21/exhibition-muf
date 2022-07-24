@@ -1,9 +1,9 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import styles from './Main.module.scss';
-import axios from "axios";
 import {useTranslation} from "react-i18next";
 import LeftPanel from "../../components/LeftPanel/LeftPanel";
 import ContentMap from "../../components/ContentMap/ContentMap";
+import {ALL_OBJECTS_JSON, DETAILT_RECOMENDED_ITEMS} from "./dataFromServer";
 
 const DEFAULT_LANG_KEY = 'ru'
 
@@ -11,10 +11,6 @@ const TRANSLATION_LANGUAGES = {
   en: {viewName: 'RUS', nativeName: 'English'},
   ru: {viewName: 'ENG', nativeName: 'Russian'}
 };
-
-const ALL_OBJECTS_API_URL = 'https://exhibition-muf-maps.truemachine.space/api/objects'
-const RECOMENDED_API_URL = 'https://exhibition-muf-maps.truemachine.space/api/objects/recommended'
-const BASE_RECOMENDED_DETAILT_URL = 'https://exhibition-muf-maps.truemachine.space/api/objects/recommended/'
 
 function Main() {
   const [langKey, setLangKey] = useState(DEFAULT_LANG_KEY)
@@ -85,7 +81,7 @@ function Main() {
       {
         id: 'id--general_physical_and_strength_training',
         viewName: t('leftMenu.tags.general_physical_and_strength_training'),
-        ru: 'Общая'
+        ru: 'Общая физическая и силовая подготовка'
       },
       {id: 'id--gym', viewName: t('leftMenu.tags.gym'), ru: 'Тренажерный зал'},
       {id: 'id--pool', viewName: t('leftMenu.tags.pool'), ru: 'Бассейн'},
@@ -97,7 +93,11 @@ function Main() {
       {id: 'id--skating_rink', viewName: t('leftMenu.tags.skating_rink'), ru: 'Каток'},
       {id: 'id--climbing', viewName: t('leftMenu.tags.climbing'), ru: 'Скалолазание'},
       {id: 'id--martial_arts', viewName: t('leftMenu.tags.martial_arts'), ru: 'Единоборства'},
-      {id: 'id--rhythmic_gymnastics', viewName: t('leftMenu.tags.rhythmic_gymnastics'), ru: 'Ритмическая гимнастика'},
+      {
+        id: 'id--rhythmic_gymnastics',
+        viewName: t('leftMenu.tags.rhythmic_gymnastics'),
+        ru: 'Художественная гимнастика'
+      },
       {id: 'id--extreme_sports_ground', viewName: t('leftMenu.tags.extreme_sports_ground'), ru: 'Площадка для'},
       {id: 'id--chess_club', viewName: t('leftMenu.tags.chess_club'), ru: 'Шахматный клуб'},
       {id: 'id--shooting', viewName: t('leftMenu.tags.shooting'), ru: 'Стрельба'},
@@ -113,7 +113,7 @@ function Main() {
       {
         id: 'id--general_physical_training',
         viewName: t('leftMenu.tags.general_physical_training'),
-        ru: 'Общая физическая'
+        ru: 'Общая физическая подготовка'
       },
       {id: 'id--fitness_aerobics', viewName: t('leftMenu.tags.fitness_aerobics'), ru: 'Фитнес-аэробика'},
       {id: 'id--cross_country_skiing', viewName: t('leftMenu.tags.cross_country_skiing'), ru: 'Лыжный спорт'},
@@ -280,33 +280,14 @@ function Main() {
       {id: 'id--sports_of_the_blind', viewName: t('leftMenu.tags.sports_of_the_blind'), ru: 'Спорт слепых'},
     ];
   }, [t])
-  const [activeSportTagIds, setActiveSportTagIds] = useState(['id--football', 'id--hockey', 'id--athletics']) // null || [id--Хоккей]
-
-
-  const [searchTerm, setSearchTerm] = useState('');
-  const debouncedSearchTerm = useDebounce(searchTerm, 1500);
+  const [activeSportTagIds, setActiveSportTagIds] = useState(['id--football',
+    'id--hockey',
+    'id--boxing', 'id--skating', 'id--motor_sport']) // null || [id--Хоккей]
 
 
   async function fetchData() {
-    try {
-      const recomendedResponse = await axios.get(RECOMENDED_API_URL)
-      const allItemsFromResponse = recomendedResponse.data.data
-
-      const recomendedItemsDetailInfo = []
-      for await (const item of allItemsFromResponse.items) {
-        const newDetailtData = await axios.get(`${BASE_RECOMENDED_DETAILT_URL}${item.id}`)
-        recomendedItemsDetailInfo.push(newDetailtData.data)
-      }
-      setRecommendedItems(recomendedItemsDetailInfo)
-
-      const allObjectResponse = await axios.get(ALL_OBJECTS_API_URL)
-      const allObjectFromResponse = allObjectResponse.data.data
-      setAllObjects(allObjectFromResponse.items)
-
-    } catch (error) {
-      alert('Ошибка при запросе данных ;(');
-      console.error(error);
-    }
+    setRecommendedItems(DETAILT_RECOMENDED_ITEMS)
+    setAllObjects(ALL_OBJECTS_JSON)
   }
 
   useEffect(() => {
@@ -314,54 +295,41 @@ function Main() {
   }, []);
 
   const filtredRecommendedItems = useMemo(() => {
-    if (!debouncedSearchTerm && !activeSportTagIds?.length) {
+    if (!activeSportTagIds?.length) {
       return recommendedItems
     }
     let returnedItems = [...recommendedItems]
-    if (debouncedSearchTerm) {
-      returnedItems = returnedItems.filter((item) =>
-        item.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.name_en.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.name_ru.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+    const filteredTags = sportsTags.filter(sportTag => activeSportTagIds.some(activeTag => activeTag === sportTag.id))
+    const tagsRuNames = {}
+    if (!filteredTags.length) {
+      return returnedItems
     }
-    if (activeSportTagIds?.length) {
-      const filteredTags = sportsTags.filter(sportTag => activeSportTagIds.some(activeTag => activeTag === sportTag.id))
-      const tagsRuNames = {}
-      if (!filteredTags.length) {
-        return returnedItems
-      }
-      filteredTags.forEach((filterTag => tagsRuNames[filterTag.ru] = true))
-      returnedItems = returnedItems.filter((item) =>
-        filteredTags.every(filterTag => JSON.parse(item.sport_types_ru).some(sportTag => sportTag === filterTag.ru))
-      )
-    }
+    filteredTags.forEach((filterTag => tagsRuNames[filterTag.ru] = true))
+    returnedItems = returnedItems.filter((item) =>
+      filteredTags.every(filterTag => JSON.parse(item.sport_types_ru).some(sportTag => sportTag === filterTag.ru))
+    )
     return returnedItems
-  }, [debouncedSearchTerm, activeSportTagIds, recommendedItems])
+  }, [activeSportTagIds, recommendedItems])
+
   const filtredAllObjects = useMemo(() => {
-    if (!debouncedSearchTerm && !activeSportTagIds?.length) {
+    if (!activeSportTagIds?.length) {
       return allObjects
     }
-    let returnedItems = [...allObjects]
-    if (debouncedSearchTerm) {
-      returnedItems = returnedItems.filter((item) =>
-        item.short_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+    const newReturnedItems = []
+
+    const filteredTags = sportsTags.filter(sportTag => activeSportTagIds.some(activeTag => activeTag === sportTag.id))
+    if (!filteredTags.length) {
+      return allObjects
     }
-    if (activeSportTagIds?.length) {
-      const filteredTags = sportsTags.filter(sportTag => activeSportTagIds.some(activeTag => activeTag === sportTag.id))
-      const tagsRuNames = {}
-      if (!filteredTags.length) {
-        return returnedItems
+    for (let i = 0, len = allObjects.length; i < len; i++) {
+      const item = allObjects[i]
+      const itemTags = JSON.parse(item.sport_type)
+      if (filteredTags.every(filterTag => itemTags.includes(filterTag.ru))) {
+        newReturnedItems.push(item)
       }
-      filteredTags.forEach((filterTag => tagsRuNames[filterTag.ru] = true))
-      returnedItems = returnedItems.filter((item) =>
-        filteredTags.every(filterTag => JSON.parse(item.sport_type).some(sportTag => sportTag === filterTag.ru))
-      )
     }
-    return returnedItems
-  }, [debouncedSearchTerm, activeSportTagIds, allObjects])
+    return newReturnedItems
+  }, [activeSportTagIds, allObjects])
 
   return (
     <div className={styles.main}>
@@ -378,14 +346,10 @@ function Main() {
       </button>
       <div className={styles.main__content}>
         <LeftPanel
-          allObjects={filtredAllObjects}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
           activeSportTagIds={activeSportTagIds}
           setActiveSportTagIds={setActiveSportTagIds}
           langKey={langKey}
           sportsTags={sportsTags}
-          debouncedSearchTerm={debouncedSearchTerm}
         />
         <ContentMap
           recommendedItems={filtredRecommendedItems}
