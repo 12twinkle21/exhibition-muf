@@ -1,9 +1,9 @@
 @import "../../index";
 
 
-.VirtualKeyboard{
+.VirtualKeyboard {
 
-  &__keyboard{
+  &__keyboard {
     position: fixed;
     z-index: 1;
     top: 65vh;
@@ -14,24 +14,28 @@
     overflow: hidden;
     transition: height 0.3s, transform 0.3s;
 
-    &--m-visible{
+    &--m-visible {
       height: 35vh;
       transform: translateY(0);
     }
-    &--m-hidden{
+
+    &--m-hidden {
       height: 0;
       transform: translateY(35vh);
       transition: height 0.3s, transform 0.3s;
     }
-    :global(.hg-theme-default){
+
+    :global(.hg-theme-default) {
       background: unset;
       padding: 0;
     }
-    :global(.hg-row:first-child){
+
+    :global(.hg-row:first-child) {
       padding-top: 1vh;
     }
+
     //all btn styles
-    :global(.hg-button){
+    :global(.hg-button) {
       height: 6vh;
       color: #384057;
       background: white;
@@ -43,34 +47,39 @@
       outline: calcSize(1) solid #384057;
       border-bottom: none;
       transition: background 0.3s, color 0.3s;
-      &:active{
+
+      &:active {
         outline: unset;
         color: black;
       }
     }
-    :global(.hg-theme-default .hg-row .hg-button:not(:last-child)){
+
+    :global(.hg-theme-default .hg-row .hg-button:not(:last-child)) {
       //margin-right: 0;
     }
+
     //.com btn styles
-    :global(.hg-theme-default .hg-button.hg-standardBtn[data-skbtn=".com"]){
+    :global(.hg-theme-default .hg-button.hg-standardBtn[data-skbtn=".com"]) {
       max-width: 7vw;
     }
+
     //@ btn styles
-    :global(.hg-theme-default .hg-button.hg-standardBtn[data-skbtn="@"]){
+    :global(.hg-theme-default .hg-button.hg-standardBtn[data-skbtn="@"]) {
       max-width: 7vw;
     }
 
-    :global(.hg-button[data-skbtn="{close}"]){
+    :global(.hg-button[data-skbtn="{close}"]) {
       font-size: 0;
       position: relative;
       background: #9D2030;
       transition: background 0.3s;
 
-      &:active{
+      &:active {
         background: white;
         color: black;
       }
-      &::before{
+
+      &::before {
         position: absolute;
         top: 50%;
         left: 30%;
@@ -81,7 +90,7 @@
         background: white;
       }
 
-      &::after{
+      &::after {
         position: absolute;
         top: 50%;
         left: 30%;
@@ -92,73 +101,73 @@
         background: white;
       }
     }
-    :global(.hg-button[data-skbtn="{enter}"]){
+
+    :global(.hg-button[data-skbtn="{enter}"]), :global(.hg-button[data-skbtn="{bksp}"]), :global(.hg-button[data-skbtn="{shift}"]), :global(.hg-button[data-skbtn="{lock}"]), :global(.hg-button[data-skbtn="{tab}"]) {
       font-size: 0;
       position: relative;
-      background: #9D2030;
+      width: calcSize(1000);
+      background: white;
       transition: background 0.3s;
 
-      &:active{
+      &:active {
         background: white;
         color: black;
       }
-      &::before{
-        position: absolute;
-        top: 50%;
-        left: 30%;
-        content: "";
-        width: 40%;
-        height: calcSize(30);
-        transform: rotate(135deg);
-        background: white;
-      }
 
-      &::after{
+      &::after {
         position: absolute;
-        top: 50%;
-        left: 30%;
+        top: 0;
+        left: 0;
         content: "";
-        width: 40%;
-        height: calcSize(30);
-        transform: rotate(45deg);
-        background: white;
+        width: 100%;
+        height: 100%;
+        background: url('../../../public/img/enter-key.svg') no-repeat center center;
+        background-size: contain;
       }
     }
-    :global(.hg-button[data-skbtn="{bksp}"]){
-      font-size: 0;
-      position: relative;
-      background: #9D2030;
-      transition: background 0.3s;
 
-      &:active{
-        background: white;
-        color: black;
+    :global(.hg-button[data-skbtn="{bksp}"]) {
+      &::after {
+        background: url('../../../public/img/backspace-key.svg') no-repeat center center;
+        background-size: contain;
       }
-      &::before{
-        position: absolute;
-        top: 50%;
-        left: 30%;
-        content: "";
-        width: 40%;
-        height: calcSize(30);
-        transform: rotate(135deg);
-        background: white;
-      }
+    }
 
-      &::after{
-        position: absolute;
-        top: 50%;
-        left: 30%;
-        content: "";
-        width: 40%;
-        height: calcSize(30);
-        transform: rotate(45deg);
-        background: white;
+    :global(.hg-button[data-skbtn="{shift}"]) {
+      &::after {
+        content: '⇪';
+        width: 30%;
+        font-size: calcSize(600);
+        left: 35%;
+        top: -10%;
+        background: transparent;
+      }
+    }
+
+    :global(.hg-button[data-skbtn="{lock}"]) {
+      &::after {
+        content: '⇧';
+        width: 30%;
+        font-size: calcSize(600);
+        left: 35%;
+        top: 0;
+        background: transparent;
+      }
+    }
+
+    :global(.hg-button[data-skbtn="{tab}"]) {
+      &::after {
+        width: 70%;
+        height: 70%;
+        left: 15%;
+        top: 15%;
+        background: url('../../../public/img/tab-key.svg') no-repeat center center;
+        background-size: contain;
       }
     }
   }
 
-  & .input{
+  & .input {
     position: relative;
     width: calcSize(2439);
     height: calcSize(460);
@@ -167,14 +176,14 @@
     align-items: center;
     padding: 0 0 0 calcSize(400);
 
-    input{
+    input {
       width: 100%;
       height: calcSize(240);
       font-size: calcSize(150);
       border: unset;
       outline: unset;
 
-      &::placeholder{
+      &::placeholder {
         color: #315390;
         font-size: calcSize(150);
         margin-top: calcSize(20);
@@ -182,7 +191,7 @@
       }
     }
 
-    &__icon{
+    &__icon {
       position: absolute;
       left: calcSize(128);
       top: 0;
@@ -191,7 +200,7 @@
       display: flex;
       align-items: center;
 
-      & img{
+      & img {
         position: relative;
         object-fit: contain;
         width: 100%;
