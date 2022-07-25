@@ -123,10 +123,11 @@
       &::after {
         color: #384057;
         content: '⇧';
-        width: 30%;
-        font-size: calcSize(600);
+        width: calc(100% - #{calcSize(300)});
+        font-size: calcSize(400);
         left: 35%;
         top: 0;
+        text-align: left;
         background: transparent;
         transition: color 0.3s;
       }
@@ -136,47 +137,51 @@
         color: black;
         position: absolute;
         top: 0;
-        left: 0;
+        left: 10%;
         content: "";
         width: 100%;
         height: 100%;
-        background: url('../../../public/img/enter-key.svg') no-repeat center center;
+        background: url('../../../public/img/enter-key.svg') no-repeat center right;
         background-size: contain;
+        transform: scale(0.7);
       }
     }
     :global(.hg-button[data-skbtn="{bksp}"]) {
+      width: calcSize(700);
+
       &::after {
         content: '⌫';
-        width: 35%;
-        left: 32.5%;
-        top: -2.5%;
+        text-align: right;
       }
     }
 
+    :global(.hg-button[data-skbtn="{shift}"]:first-of-type) {
+      width: calcSize(200);
+    }
+    :global(.hg-button[data-skbtn="{shift}"]:last-of-type) {
+      width: calcSize(1400);
+
+      &::after{
+        text-align: right;
+      }
+    }
     :global(.hg-button[data-skbtn="{shift}"]) {
       &::after {
         content: '⇧';
-        width: 30%;
-        left: 35%;
-        top: 0;
       }
     }
 
     :global(.hg-button[data-skbtn="{lock}"]) {
       &::after {
         content: '⇪';
-        width: 30%;
-        left: 35%;
-        top: -10%;
       }
     }
 
     :global(.hg-button[data-skbtn="{tab}"]) {
+      width: calcSize(700);
+
       &::after {
         content: '⇥';
-        width: 30%;
-        left: 35%;
-        top: 0;
       }
     }
   }
