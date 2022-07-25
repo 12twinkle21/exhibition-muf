@@ -52,6 +52,10 @@
         outline: unset;
         color: black;
       }
+      &:active {
+        background: #384057;
+        color: white;
+      }
     }
 
     :global(.hg-theme-default .hg-row .hg-button:not(:last-child)) {
@@ -110,11 +114,26 @@
       transition: background 0.3s;
 
       &:active {
-        background: white;
-        color: black;
+        background: #384057;
+        &::after{
+          color: white;
+        }
       }
 
       &::after {
+        color: #384057;
+        content: '⇧';
+        width: 30%;
+        font-size: calcSize(600);
+        left: 35%;
+        top: 0;
+        background: transparent;
+        transition: color 0.3s;
+      }
+    }
+    :global(.hg-button[data-skbtn="{enter}"]){
+      &::after {
+        color: black;
         position: absolute;
         top: 0;
         left: 0;
@@ -125,44 +144,39 @@
         background-size: contain;
       }
     }
-
     :global(.hg-button[data-skbtn="{bksp}"]) {
       &::after {
-        background: url('../../../public/img/backspace-key.svg') no-repeat center center;
-        background-size: contain;
+        content: '⌫';
+        width: 35%;
+        left: 32.5%;
+        top: -2.5%;
       }
     }
 
     :global(.hg-button[data-skbtn="{shift}"]) {
       &::after {
-        content: '⇪';
+        content: '⇧';
         width: 30%;
-        font-size: calcSize(600);
         left: 35%;
-        top: -10%;
-        background: transparent;
+        top: 0;
       }
     }
 
     :global(.hg-button[data-skbtn="{lock}"]) {
       &::after {
-        content: '⇧';
+        content: '⇪';
         width: 30%;
-        font-size: calcSize(600);
         left: 35%;
-        top: 0;
-        background: transparent;
+        top: -10%;
       }
     }
 
     :global(.hg-button[data-skbtn="{tab}"]) {
       &::after {
-        width: 70%;
-        height: 70%;
-        left: 15%;
-        top: 15%;
-        background: url('../../../public/img/tab-key.svg') no-repeat center center;
-        background-size: contain;
+        content: '⇥';
+        width: 30%;
+        left: 35%;
+        top: 0;
       }
     }
   }
