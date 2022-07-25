@@ -33,7 +33,7 @@ function MapComponent(props) {
     }))
     setTimeout(() => {
       mapRef.setCenter([Number(firstMark.latitude), Number(firstMark.longitude)], 16)
-    }, 1500)
+    }, 500)
   }, [mapMarks, lastRenderPlacemarkRef, mapRef, clusterRef])
 
   return (
@@ -56,6 +56,16 @@ function MapComponent(props) {
                                tags: currentMarkTags,
                                address: item.address
                              }),
+                           }}
+                           onClick={() => {
+                             const currentOpenedBalloonPosition = mapRef?.balloon?.getPosition()
+                             if(!currentOpenedBalloonPosition){
+                               return
+                             }
+                             const currentItemPosition = [Number(item.latitude), Number(item.longitude)]
+                             if(currentOpenedBalloonPosition[0] === currentItemPosition[0] && currentOpenedBalloonPosition[1] === currentItemPosition[1]){
+                               setTimeout(() => mapRef?.balloon.close(), 20)
+                             }
                            }}
                            options={{
                              balloonOffset: [0, -30],

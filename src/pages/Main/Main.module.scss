@@ -19,6 +19,12 @@
     -o-filter: grayscale(1);
   }
 
+
+  //cluster icon
+  :global(.ymaps-2-1-79-svg-icon){
+    transform: scale(2);
+  }
+
   :global(.ymaps-2-1-79-islets_circle-dot-icon-with-caption){
     position: relative;
     &:after{
@@ -31,6 +37,7 @@
       background: white;
     }
   }
+
   :global(.ymaps-2-1-79-copyrights-pane){
     display: none;
   }
