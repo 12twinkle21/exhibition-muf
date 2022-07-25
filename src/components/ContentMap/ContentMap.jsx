@@ -12,7 +12,6 @@ function ContentMap(props) {
     dots: false,
     arrows: true,
     centerMode: true,
-    infinite: recommendedItems?.length > 3,
     swipeToSlide: true,
     swipe: false,
     speed: 500,
@@ -25,7 +24,7 @@ function ContentMap(props) {
       <MapComponent mapMarks={allObjects}/>
       {recommendedItems?.length
         ?       <div className={styles.contentMap__recommendation} ref={sliderContainer}>
-          <Slider {...SWIPER_SETTINGS}>
+          <Slider {...SWIPER_SETTINGS} infinite={recommendedItems?.length > 3}>
             {
               recommendedItems.map((items) => (
                 <RecommendationCard items={items} data-key={`${items.name_ru}_${items.id}`} key={`${items.name_ru}_${items.id}`}/>)
