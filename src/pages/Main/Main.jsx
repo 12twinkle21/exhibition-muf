@@ -280,9 +280,13 @@ function Main() {
       {id: 'id--sports_of_the_blind', viewName: t('leftMenu.tags.sports_of_the_blind'), ru: 'Спорт слепых'},
     ];
   }, [t])
-  const [activeSportTagIds, setActiveSportTagIds] = useState(['id--football',
-    'id--hockey',
-    'id--boxing']) // null || [id--Хоккей]
+
+  const [activeSportTagIds, setActiveSportTagIds] = useState([]) // null || [id--Хоккей]
+    // [
+    // 'id--football',
+    //   'id--hockey',
+    //   'id--boxing'
+    // ]
 
 
   async function fetchData() {
