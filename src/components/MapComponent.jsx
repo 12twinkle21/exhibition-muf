@@ -59,11 +59,11 @@ function MapComponent(props) {
                            }}
                            onClick={() => {
                              const currentOpenedBalloonPosition = mapRef?.balloon?.getPosition()
-                             if(!currentOpenedBalloonPosition){
+                             if (!currentOpenedBalloonPosition) {
                                return
                              }
                              const currentItemPosition = [Number(item.latitude), Number(item.longitude)]
-                             if(currentOpenedBalloonPosition[0] === currentItemPosition[0] && currentOpenedBalloonPosition[1] === currentItemPosition[1]){
+                             if (currentOpenedBalloonPosition[0] === currentItemPosition[0] && currentOpenedBalloonPosition[1] === currentItemPosition[1]) {
                                setTimeout(() => mapRef?.balloon.close(), 20)
                              }
                            }}
@@ -101,13 +101,19 @@ export default MapComponent;
 const PlacemarkBalloon = (props) => {
   const {title, tags, address} = props
 
-  return ` <h3 className="ballon__title">
+  return ` 
+    <nav>
+ <h3>
         ${title}
       </h3>
-      <main className="ballon__tags">
-        ${tags.map(tagName => `<span key={tagName}>${tagName}</span>`).join(' ')}
+      <main>
+        <div>
+            ${tags.map(tagName => `<span key={tagName}>${tagName}</span>`).join(' ')}
+        </div>
       </main>
-      <aside className="ballon__address">
+      <aside>
         <div>${address}</div>
-      </aside>`
+      </aside>
+</nav>
+`
 }

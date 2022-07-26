@@ -26,6 +26,16 @@
     color: #384057;
   }
 
+  h4 {
+    margin-top: 1vw;
+    margin-bottom: 0.5vw;
+    font-size: calcSize(100);
+    line-height: 120%;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #384057;
+  }
+
   &__search {
     position: relative;
     margin-top: calcSize(200);
@@ -43,7 +53,12 @@
     margin: calcSize(240) 0 calcSize(380);
 
     &::-webkit-scrollbar {
-      display: none;
+      width: calcSize(60);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #315390;
+      border-radius: 10px;
     }
   }
 

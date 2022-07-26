@@ -29,13 +29,17 @@
     .recommendationCard__frontRight{
       width: 100%;
       height: 100%;
+      max-height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding: 0.99532vw;
+      overflow: hidden;
 
-      &::-webkit-scrollbar {
-        display: none;
+      & >  div:first-child{
+        display: flex;
+        flex-direction: column;
+        overflow: scroll;
       }
     }
 
@@ -44,7 +48,8 @@
       font-size: calcSize(250);
       line-height: 120%;
       text-transform: uppercase;
-      margin-bottom: calzSize(30);
+      margin-bottom: calcSize(30);
+      height: max-content;
     }
 
     .recommendationCard__sportList ul{
@@ -56,10 +61,14 @@
 
     .recommendationCard__sportList{
       overflow-y: scroll;
-      max-height: calcSize(1300);
 
       &::-webkit-scrollbar {
-        display: none;
+        width: calcSize(60);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: white;
+        border-radius: 10px;
       }
     }
 
@@ -88,6 +97,7 @@
     .recommendationCard__address{
       display: flex;
       align-items: center;
+      height: max-content;
       border-top: calcSize(10) solid rgba(255, 255, 255, 0.1);
       padding-top: calcSize(200);
     }

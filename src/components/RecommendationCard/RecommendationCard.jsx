@@ -3,9 +3,8 @@ import styles from './RecommendationCard.module.scss';
 import Slider from "react-slick";
 
 function RecommendationCard(props) {
-  const {items} = props;
+  const {items, isRuLocal} = props;
   const [visibleBackCard, setVisibleBackCard] = React.useState(false);
-
   const onVisibleBackCard = () => {
     setVisibleBackCard(!visibleBackCard);
   }
@@ -22,11 +21,11 @@ function RecommendationCard(props) {
   };
 
   const formattedItems = useMemo(() => {
-    if (!items.sport_types_ru) {
+    if (!items.sport_types_ru || !items.sport_types_en) {
       return []
     }
-    return JSON.parse(items.sport_types_ru)
-  }, [items])
+    return isRuLocal ? JSON.parse(items.sport_types_ru) : JSON.parse(items.sport_types_en)
+  }, [items, isRuLocal])
 
   return (
 
@@ -48,7 +47,7 @@ function RecommendationCard(props) {
           <div className={styles.recommendationCard__frontRight + ' ' + 'recommendationCard__frontRight'} onClick={onVisibleBackCard}>
             <div className={styles.recommendationCard__top}>
               <div className={styles.recommendationCard__title}>
-                <h3>{items.name_ru}</h3>
+                <h3>{isRuLocal ? items.name_ru : items.name_en}</h3>
               </div>
               <div className={styles.recommendationCard__sportList}>
                 <ul>
@@ -70,7 +69,7 @@ function RecommendationCard(props) {
         </div>
         :
         <div className={styles.recommendationCard__back} onClick={onVisibleBackCard}>
-          <p>{items.description_ru}</p>
+          <p>{isRuLocal ? items.description_ru : items.description_en}</p>
         </div>
       }
     </div>

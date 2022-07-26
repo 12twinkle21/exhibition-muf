@@ -35,6 +35,7 @@ i18n
           },
           leftMenu: {
             sportsTypeTitle: 'TYPES OF SPORTS',
+            notFound: 'Nothing found',
             tags: {
               football: 'Football',
               athletics: 'Athletics',
@@ -228,6 +229,7 @@ i18n
           },
           leftMenu: {
             sportsTypeTitle: 'ВИДЫ СПОРТА',
+            notFound: 'Ничего не найдено',
             tags: {
               football: 'Футбол',
               athletics: 'Легкая атлетика',
@@ -318,7 +320,7 @@ i18n
               weightlifting: 'Тяжелая атлетика',
               aircraft_modeling: 'Авиамодельный спорт',
               aerobics: 'Аэробика',
-              figure_skating: 'Фигурное катание',
+              figure_skating: 'Фигурное катание на коньках',
               urban_sports: 'Городской спорт',
               shooting_from_a_crossbow: 'Стрельба из арбалета',
               sports_tourism: 'Спортивный туризм',

@@ -27,7 +27,7 @@ function LeftPanel(props) {
         setSearchResults(sportsTags);
       }
     },
-    [debouncedSearchTerm, sportsTags]
+    [debouncedSearchTerm, sportsTags, activeSportTagIds]
   );
 
   function handleSportTagClick(newTagId) {
@@ -51,8 +51,8 @@ function LeftPanel(props) {
       </div>
       <div className={styles.leftFloatMenu__sportsTagsScrollContainer}>
       <div className={styles.leftFloatMenu__sportsTags}>
-        {searchResults.length &&
-          searchResults.map(sportTag => (
+        {searchResults.length
+          ? searchResults.map(sportTag => (
               <div key={sportTag.id}
                    onClick={() => handleSportTagClick(sportTag.id)}
                    className={
@@ -63,6 +63,9 @@ function LeftPanel(props) {
               </div>
             )
           )
+          : <div>
+            <h4>{t('leftMenu.notFound')}</h4>
+          </div>
         }
       </div>
       </div>

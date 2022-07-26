@@ -152,7 +152,7 @@ function Main() {
       {id: 'id--weightlifting', viewName: t('leftMenu.tags.weightlifting'), ru: 'Тяжелая атлетика'},
       {id: 'id--aircraft_modeling', viewName: t('leftMenu.tags.aircraft_modeling'), ru: 'Авиамодельный спорт'},
       {id: 'id--aerobics', viewName: t('leftMenu.tags.aerobics'), ru: 'Аэробика'},
-      {id: 'id--figure_skating', viewName: t('leftMenu.tags.figure_skating'), ru: 'Фигурное катание'},
+      {id: 'id--figure_skating', viewName: t('leftMenu.tags.figure_skating'), ru: 'Фигурное катание на коньках'},
       {id: 'id--urban_sports', viewName: t('leftMenu.tags.urban_sports'), ru: 'Городской спорт'},
       {
         id: 'id--shooting_from_a_crossbow',
@@ -281,12 +281,12 @@ function Main() {
     ];
   }, [t])
 
-  const [activeSportTagIds, setActiveSportTagIds] = useState([]) // null || [id--Хоккей]
-    // [
-    // 'id--football',
-    //   'id--hockey',
-    //   'id--boxing'
-    // ]
+  const [activeSportTagIds, setActiveSportTagIds] = useState( [
+    'id--football',
+    'id--hockey',
+    'id--boxing'
+  ]) // null || [id--Хоккей]
+
 
 
   async function fetchData() {
