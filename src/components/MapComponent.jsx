@@ -39,7 +39,7 @@ function MapComponent(props) {
   return (
     <YMaps>
       <Map defaultState={MAP_SETTINGS} className='map' instanceRef={map => setMapRef(map)}>
-        <Clusterer options={{preset: 'islands#invertedNightClusterIcons', viewportMargin: 1280}} instanceRef={ref => {
+        <Clusterer options={{preset: 'islands#invertedNightClusterIcons', viewportMargin: 1280, gridSize: 256}} instanceRef={ref => {
           if (ref) {
             setCluster(ref);
           }
