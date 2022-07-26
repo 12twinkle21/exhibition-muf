@@ -282,13 +282,10 @@ function Main() {
   }, [t])
 
   const [activeSportTagIds, setActiveSportTagIds] = useState( [
-    
-  ]) // null || [id--Хоккей]
-    // [
     // 'id--football',
     //   'id--hockey',
     //   'id--boxing'
-    // ]
+  ]) // null || [id--Хоккей]
 
 
 

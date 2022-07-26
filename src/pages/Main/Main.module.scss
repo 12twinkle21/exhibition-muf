@@ -44,10 +44,10 @@
 
   //Close icon
   :global(.ymaps-2-1-79-balloon__close-button){
-    width: calcSize(600);
-    height: calcSize(600);
+    width: calcSize(400);
+    height: calcSize(400);
     background-size: 50%;
-    transform: translateY(46px);
+    transform: translateY(30px);
   }
 
   :global(.ymaps-2-1-79-svg-icon){
