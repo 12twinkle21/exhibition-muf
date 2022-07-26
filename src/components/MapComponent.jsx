@@ -20,19 +20,21 @@ function MapComponent(props) {
     const firstMark = mapMarks[0]
     const allPlacemarkNodes = clusterRef.getGeoObjects()
     const firstPlacemarkNode = allPlacemarkNodes[0]
-    if (!firstMark || !allPlacemarkNodes?.length || !firstPlacemarkNode || allPlacemarkNodes.length !== mapMarks.length) {
+    if (!firstMark || !allPlacemarkNodes?.length || !firstPlacemarkNode) {
       mapRef?.balloon?.close()
       return;
     }
     const currentMarkTags = JSON.parse(firstMark.sport_type)
-
-    mapRef.balloon.open([Number(firstMark.latitude), Number(firstMark.longitude)], PlacemarkBalloon({
-      title: firstMark.name,
-      tags: currentMarkTags,
-      address: firstMark.address
-    }))
+    mapRef.balloon.close()
     setTimeout(() => {
-      mapRef.setCenter([Number(firstMark.latitude), Number(firstMark.longitude)], 16)
+      mapRef.balloon.open([Number(firstMark.latitude), Number(firstMark.longitude)], PlacemarkBalloon({
+        title: firstMark.name,
+        tags: currentMarkTags,
+        address: firstMark.address
+      }))
+    }, 500)
+    setTimeout(() => {
+      mapRef.setCenter([Number(firstMark.latitude), Number(firstMark.longitude)], 18)
     }, 500)
   }, [mapMarks, lastRenderPlacemarkRef, mapRef, clusterRef])
 
@@ -69,7 +71,6 @@ function MapComponent(props) {
                            }}
                            options={{
                              balloonOffset: [0, -30],
-                             // balloonCloseButton: false,
                              hideIconOnBalloonOpen: false,
                              iconLayout: 'default#image',
                              iconImageHref: 'img/point.svg',

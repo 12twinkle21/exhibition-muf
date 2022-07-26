@@ -10,6 +10,7 @@ function LeftPanel(props) {
     setActiveSportTagIds,
     langKey,
     sportsTags,
+    startTransition
   } = props
   const {t} = useTranslation();
 
@@ -19,13 +20,15 @@ function LeftPanel(props) {
 
   useEffect(
     () => {
-      if (debouncedSearchTerm) {
-        setSearchResults(sportsTags.filter((item) => item.viewName.toLowerCase().includes(searchTerm.toLowerCase()) || item.ru.toLowerCase().includes(searchTerm.toLowerCase()) || activeSportTagIds.includes(item.id)));
-      } else if (searchTerm) {
-        setSearchResults([]);
-      } else {
-        setSearchResults(sportsTags);
-      }
+      startTransition(() => {
+        if (debouncedSearchTerm) {
+          setSearchResults(sportsTags.filter((item) => item.en.toLowerCase().includes(searchTerm.toLowerCase()) || item.ru.toLowerCase().includes(searchTerm.toLowerCase()) || activeSportTagIds.includes(item.id)));
+        } else if (searchTerm) {
+          setSearchResults([]);
+        } else {
+          setSearchResults(sportsTags);
+        }
+      })
     },
     [debouncedSearchTerm, sportsTags, activeSportTagIds]
   );
@@ -50,24 +53,24 @@ function LeftPanel(props) {
         <VirtualKeyboard langKey={langKey} onChange={text => setSearchTerm(text)}/>
       </div>
       <div className={styles.leftFloatMenu__sportsTagsScrollContainer}>
-      <div className={styles.leftFloatMenu__sportsTags}>
-        {searchResults.length
-          ? searchResults.map(sportTag => (
-              <div key={sportTag.id}
-                   onClick={() => handleSportTagClick(sportTag.id)}
-                   className={
-                     styles.sportTag + ' ' +
-                     (activeSportTagIds?.some(activeTag => activeTag === sportTag.id) ? styles['sportTag--m-active'] : '')
-                   }>
-                {sportTag.viewName}
-              </div>
+        <div className={styles.leftFloatMenu__sportsTags}>
+          {searchResults.length
+            ? searchResults.map(sportTag => (
+                <div key={sportTag.id}
+                     onClick={() => handleSportTagClick(sportTag.id)}
+                     className={
+                       styles.sportTag + ' ' +
+                       (activeSportTagIds?.some(activeTag => activeTag === sportTag.id) ? styles['sportTag--m-active'] : '')
+                     }>
+                  {sportTag.viewName}
+                </div>
+              )
             )
-          )
-          : <div>
-            <h4>{t('leftMenu.notFound')}</h4>
-          </div>
-        }
-      </div>
+            : <div>
+              <h4>{t('leftMenu.notFound')}</h4>
+            </div>
+          }
+        </div>
       </div>
     </div>
   )

@@ -18,9 +18,52 @@ body{
 //     filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
 //     filter: grayscale(100%);
 //}
-
-
-
 @function calcSize($width) {
    @return (100 * ($width / 20094)) * 1vw;
+}
+.loader {
+   border: calcSize(100) solid #f3f3f3;
+   border-top: calcSize(100) solid #315390;
+   border-radius: 50%;
+   background: white;
+   width: calcSize(1200);
+   height: calcSize(1200);
+   position: absolute;
+   top: calc(50% - #{calcSize(600)});
+   left: calc(50% - #{calcSize(600)});
+   z-index: 100;
+   animation: spin 1s linear infinite;
+   opacity: 0;
+   pointer-events: none;
+
+   &--m-active{
+      pointer-events: all;
+      opacity: 1;
+   }
+}
+.loaderBg{
+   width: 100%;
+   height: 100%;
+   background: transparent;
+   position: absolute;
+   backdrop-filter: blur(4px) grayscale(1);
+   z-index: 99;
+   top: 0;
+   left: 0;
+   pointer-events: none;
+   opacity: 0;
+
+   &--m-active{
+      pointer-events: all;
+      opacity: 1;
+   }
+}
+
+@keyframes spin {
+   0% {
+      transform: rotate(0deg);
+   }
+   100% {
+      transform: rotate(360deg);
+   }
 }
