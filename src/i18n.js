@@ -31,7 +31,7 @@ i18n
         translation: {
           topFloat: {
             part1: 'WHERE DO I GO TO PLAY ',
-            part2: 'SPORTS?'
+            part2: 'SPORTS?',
           },
           leftMenu: {
             sportsTypeTitle: 'TYPES OF SPORTS',
@@ -214,7 +214,8 @@ i18n
           searchInputPlaceholder: 'Search',
           leftFloatText: {
             part1: 'SEARCH BY',
-            part2: 'ORGANIZATION'
+            part2: 'ORGANIZATION',
+            moscow_logo: 'moscow government project'
           },
           map: {
             recomendationTitle: 'Recommendations:'
@@ -408,7 +409,8 @@ i18n
           searchInputPlaceholder: 'Поиск',
           leftFloatText: {
             part1: 'ПОИСК ',
-            part2: 'ПО ОРГАНИЗАЦИЯМ'
+            part2: 'ПО ОРГАНИЗАЦИЯМ',
+            moscow_logo: 'проект правительства москвы'
           },
           map: {
             recomendationTitle: 'Рекомендации:'

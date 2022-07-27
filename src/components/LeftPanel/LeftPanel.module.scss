@@ -6,7 +6,7 @@
   padding: calcSize(240) calcSize(200);
   position: absolute;
   width: calcSize(2839);
-  height: calcSize(6735);
+  height: calcSize(7850);
   left: calcSize(1122);
   top: calcSize(2220);
 
@@ -47,7 +47,7 @@
     }
   }
   &__sportsTagsScrollContainer{
-    height: calcSize(5000);
+    height: calcSize(6070);
     overflow-y: scroll;
     width: calc(100% + #{calcSize(50)});
     margin: calcSize(240) 0 calcSize(380);

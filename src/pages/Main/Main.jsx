@@ -552,6 +552,14 @@ function Main() {
         <button className={styles.LangBtn} onClick={changeLanguage}>
           <span>{TRANSLATION_LANGUAGES[langKey].viewName}</span>
         </button>
+        <div className={styles.MoscowLogo}>
+          <div className={styles.MoscowLogo__img}>
+            <img src="img/moscow_flag.svg" alt=""/>
+          </div>
+          <div className={styles.MoscowLogo__text}>
+            {t('leftFloatText.moscow_logo')}
+          </div>
+        </div>
         <div className={styles.main__content}>
           <LeftPanel
             activeSportTagIds={activeSportTagIds}

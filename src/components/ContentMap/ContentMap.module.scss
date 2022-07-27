@@ -47,11 +47,14 @@
     }
 
     :global(.recommendationCard__front){
-      transition: opacity 0.5s;
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    :global(.recommendationCard__back){
+      transition: transform 0.5s, opacity 0.1s;
     }
 
     :global(.slick-slide) {
-      background-color: #384054;
       transition: transform 0.5s, opacity 0.5s;
     }
 
@@ -60,9 +63,8 @@
     }
 
     :global(.slick-active:not(.slick-center) .recommendationCard__front) {
-      background: linear-gradient(180deg, rgba(26, 30, 41, 0) 0%, rgba(26, 30, 41, 0.69) 100%);
       backdrop-filter: blur(4px);
-      opacity: 0.4;
+      opacity: 0.8;
     }
   }
 

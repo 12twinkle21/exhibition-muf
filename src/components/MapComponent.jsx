@@ -8,8 +8,9 @@ const MAP_SETTINGS = {
 };
 
 function MapComponent(props) {
-  const {mapMarks} = props
+  const {mapMarks, activeRecomendCard} = props
   const [allObjects, setAllObjects] = useState(ALL_OBJECTS_JSON)
+  const [mapRef, setMapRef] = useState()
 
   const features = useMemo(() => {
     return allObjects.map(item => {
@@ -43,9 +44,32 @@ function MapComponent(props) {
     });
   }, [allObjects])
 
+  useEffect(() => {
+    if (!mapRef || !allObjects?.length || !activeRecomendCard) {
+      mapRef?.balloon?.close()
+      return
+    }
+    const firstMark = allObjects.find(placemark => placemark.id === activeRecomendCard)
+    if (!firstMark) {
+      mapRef?.balloon?.close()
+      return;
+    }
+    const currentMarkTags = JSON.parse(firstMark.sport_type)
+
+    setTimeout(() => {
+      mapRef.balloon.open([Number(firstMark.latitude), Number(firstMark.longitude)], PlacemarkBalloon({
+        title: firstMark.name,
+        tags: currentMarkTags,
+        address: firstMark.address
+      }))
+    }, 500)
+    setTimeout(() => {
+      mapRef.setCenter([Number(firstMark.latitude), Number(firstMark.longitude)], 18)
+    }, 500)
+  }, [activeRecomendCard, mapRef])
   return (
     <YMaps>
-      <Map defaultState={MAP_SETTINGS} className='map'>
+      <Map defaultState={MAP_SETTINGS} className='map' instanceRef={map => setMapRef(map)}>
         <ObjectManager
           options={{clusterize: true, gridSize: 256}}
           objects={{openBalloonOnClick: true, preset:'islands#greenDotIcon'}}
