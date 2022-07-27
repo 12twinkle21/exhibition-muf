@@ -13,9 +13,6 @@ const TRANSLATION_LANGUAGES = {
   ru: {viewName: 'ENG', nativeName: 'Russian'}
 };
 
-const MAX_FILTERED_ALL_OBJECTS = 5000
-
-
 function Main() {
   const [isPending, startTransition] = useTransition();
 
@@ -496,7 +493,6 @@ function Main() {
 
 
   const [filtredRecommendedItems, setFiltredRecommendedItems] = useState([])
-
   useEffect(() => {
     startTransition(() => {
       if (!activeSportTagIds?.length) {
@@ -516,23 +512,25 @@ function Main() {
     })
   }, [activeSportTagIds, recommendedItems])
 
-  const [filtredAllObjects, setFiltredAllObjects] = useState([])
+  const [filtredAllObjects, setFiltredAllObjects] = useState({})
   useEffect(() => {
     startTransition(() => {
       if (!activeSportTagIds?.length) {
-        setFiltredAllObjects(allObjects.slice(0, MAX_FILTERED_ALL_OBJECTS))
+        setFiltredAllObjects({})
+        return
       }
-      const newReturnedItems = []
+      const newReturnedItems = {}
 
       const filteredTags = sportsTags.filter(sportTag => activeSportTagIds.some(activeTag => activeTag === sportTag.id))
       if (!filteredTags.length) {
-        setFiltredAllObjects(allObjects.slice(0, MAX_FILTERED_ALL_OBJECTS))
+        setFiltredAllObjects({})
+        return
       }
-      for (let i = 0, len = allObjects.slice(0, MAX_FILTERED_ALL_OBJECTS).length; i < len; i++) {
+      for (let i = 0, len = allObjects.slice(2000).length; i < len; i++) {
         const item = allObjects[i]
         const itemTags = JSON.parse(item.sport_type)
         if (filteredTags.every(filterTag => itemTags.includes(filterTag.ru))) {
-          newReturnedItems.push(item)
+          newReturnedItems[item.id] = true
         }
       }
       setFiltredAllObjects(newReturnedItems)
