@@ -526,7 +526,7 @@ function Main() {
         setFiltredAllObjects({})
         return
       }
-      for (let i = 0, len = allObjects.slice(2000).length; i < len; i++) {
+      for (let i = 0, len = allObjects.length; i < len; i++) {
         const item = allObjects[i]
         const itemTags = JSON.parse(item.sport_type)
         if (filteredTags.every(filterTag => itemTags.includes(filterTag.ru))) {
@@ -568,25 +568,6 @@ function Main() {
       </div>
     </>
   )
-}
-
-export function useDebounce(value, delay) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(
-    () => {
-      const handler = setTimeout(() => {
-        setDebouncedValue(value);
-      }, delay);
-
-      return () => {
-        clearTimeout(handler);
-      };
-    },
-    [value]
-  );
-
-  return debouncedValue;
 }
 
 export default Main;

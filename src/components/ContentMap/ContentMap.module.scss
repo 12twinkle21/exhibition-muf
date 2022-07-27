@@ -52,7 +52,7 @@
 
     :global(.slick-slide) {
       background-color: #384054;
-      transition: transform 0.5s, width 0.5s, opacity 0.5s;
+      transition: transform 0.5s, opacity 0.5s;
     }
 
     :global(.slick-active:not(.slick-center)) {
