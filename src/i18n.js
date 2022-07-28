@@ -214,8 +214,8 @@ i18n
           searchInputPlaceholder: 'Search',
           leftFloatText: {
             part1: 'SEARCH BY',
-            part2: 'ORGANIZATION',
-            moscow_logo: 'moscow government project'
+            part2: 'SPORT',
+            moscow_logo: 'Project of the Moscow city government'
           },
           map: {
             recomendationTitle: 'Recommendations:'

@@ -35,7 +35,7 @@ function Main() {
 
   const [recommendedItems, setRecommendedItems] = useState(DETAILT_RECOMENDED_ITEMS);
   const [allObjects, setAllObjects] = useState(ALL_OBJECTS_JSON);
-
+  
   const sportsTags = useMemo(() => {
     return [
       {id: 'id--football', en: 'Football', viewName: t('leftMenu.tags.football'), ru: 'Футбол'},
@@ -536,7 +536,7 @@ function Main() {
       setFiltredAllObjects(newReturnedItems)
     })
   }, [activeSportTagIds, allObjects])
-
+  
   return (
     <>
       <Spinner isLoading={isPending}/>

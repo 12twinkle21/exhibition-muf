@@ -11,7 +11,7 @@ function MapComponent(props) {
   const {mapMarks, activeRecomendCard} = props
   const [allObjects, setAllObjects] = useState(ALL_OBJECTS_JSON)
   const [mapRef, setMapRef] = useState()
-
+  
   const features = useMemo(() => {
     return allObjects.map(item => {
       const currentMarkTags = JSON.parse(item.sport_type)

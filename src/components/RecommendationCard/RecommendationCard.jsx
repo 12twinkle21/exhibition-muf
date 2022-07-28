@@ -5,15 +5,16 @@ import Slider from "react-slick";
 function RecommendationCard(props) {
   const {items, isRuLocal, setActiveRecomendCard} = props;
   const [visibleBackCard, setVisibleBackCard] = React.useState(false);
-  const onVisibleBackCard = () => {
+  const onVisibleBackCard = (e) => {
     if(!visibleBackCard){
       setActiveRecomendCard(3834)
     }else{
       setActiveRecomendCard(null)
     }
-    setVisibleBackCard(!visibleBackCard);
+    setVisibleBackCard(!visibleBackCard)
+    console.log(e.currentTarget)
   }
-
+ 
   const SWIPER_SETTINGS = {
     dots: true,
     infinite: true,

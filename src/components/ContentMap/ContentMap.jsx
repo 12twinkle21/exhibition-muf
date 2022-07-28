@@ -12,7 +12,6 @@ function ContentMap(props) {
   const [activeRecomendCard, setActiveRecomendCard] = useState(null)
 
   const isRuLocal = useMemo(() => i18n.language === 'ru', [i18n.language])
-
   const SWIPER_SETTINGS = {
     dots: false,
     centerMode: true,
@@ -22,7 +21,6 @@ function ContentMap(props) {
     slidesToShow: 2.3,
     slidesToScroll: 1,
   };
-
   return (
     <div className={styles.contentMap}>
       <MapComponent mapMarks={allObjects} activeRecomendCard={activeRecomendCard}/>
