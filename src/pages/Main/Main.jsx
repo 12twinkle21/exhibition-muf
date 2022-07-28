@@ -516,7 +516,12 @@ function Main() {
   useEffect(() => {
     startTransition(() => {
       if (!activeSportTagIds?.length) {
-        setFiltredAllObjects({})
+        const newReturnedItems = {}
+        for (let i = 0, len = allObjects.length; i < len; i++) {
+          const item = allObjects[i]
+            newReturnedItems[item.id] = true
+        }
+        setFiltredAllObjects(newReturnedItems)
         return
       }
       const newReturnedItems = {}

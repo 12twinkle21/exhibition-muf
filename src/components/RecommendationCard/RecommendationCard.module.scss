@@ -1,23 +1,27 @@
 @import "../../index";
-:global(.slick-center){
-:global(.recommendationCard--m-active){
-  :global(.recommendationCard__front) {
-    transform: rotateX(180deg) !important;
-  }
-  :global(.recommendationCard__back){
-    transform: rotateX(360deg) !important;
-    opacity: 1 !important;
-    z-index: 2 !important;
+
+:global(.slick-center), :global(.slick-center-fork) {
+
+  :global(.recommendationCard--m-active) {
+    :global(.recommendationCard__front) {
+      transform: rotateX(180deg) !important;
+    }
+
+    :global(.recommendationCard__back) {
+      transform: rotateX(360deg) !important;
+      opacity: 1 !important;
+      z-index: 2 !important;
+    }
   }
 }
-}
+
 .recommendationCard {
   height: calcSize(3450);
   position: relative;
   cursor: pointer;
   perspective: 1000px;
 
- 
+
   .recommendationCard__front {
     height: 100%;
     width: 100%;
@@ -187,7 +191,7 @@
       transition: scale 0.6s !important;
     }
 
-    :global(.slick-center) {
+    :global(.slick-center), :global(.slick-center-fork) {
       transform: scale(1) !important;
     }
 
@@ -241,12 +245,13 @@
   }
 }
 
-:global(.slick-center .RecommendationCard_recommendationCard__frontLeft) {
+:global(.slick-center .RecommendationCard_recommendationCard__frontLeft), :global(.slick-center-fork .RecommendationCard_recommendationCard__frontLeft) {
   display: block !important;
   pointer-events: all !important;
   opacity: 1 !important;
 }
 
-:global(.slick-center .recommendationCard__frontRight) {
+:global(.slick-center .recommendationCard__frontRight),
+:global(.slick-center-fork .recommendationCard__frontRight) {
   width: 50% !important;
 }

@@ -58,11 +58,11 @@
       transition: transform 0.5s, opacity 0.5s;
     }
 
-    :global(.slick-active:not(.slick-center)) {
+    :global(.slick-active:not(.slick-center):not(.slick-center-fork)) {
       transform: scale(0.9);
     }
 
-    :global(.slick-active:not(.slick-center) .recommendationCard__front) {
+    :global(.slick-active:not(.slick-center):not(.slick-center-fork) .recommendationCard__front){
       backdrop-filter: blur(4px);
       pointer-events: none;
       touch-action: none;

@@ -67,6 +67,13 @@ function MapComponent(props) {
       mapRef.setCenter([Number(firstMark.latitude), Number(firstMark.longitude)], 18)
     }, 500)
   }, [activeRecomendCard, mapRef])
+
+  useEffect(() => {
+    setTimeout(() => {
+      mapRef.balloon.close()
+      mapRef.setCenter([55.751574, 37.573856], 10)
+    }, 0)
+  }, [mapMarks])
   return (
     <YMaps>
       <Map defaultState={MAP_SETTINGS} className='map' instanceRef={map => setMapRef(map)}>
