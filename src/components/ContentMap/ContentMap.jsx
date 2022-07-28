@@ -33,7 +33,6 @@ function ContentMap(props) {
     }
     const excludedNodeClass = 'RecommendationCard_recommendationCard__frontLeft'
     const allSlidesNodes = Array.from(sliderContainerRef.current.querySelectorAll('.slick-slide'))
-    console.log(allSlidesNodes);
     const filteredSlidersNodes = []
     allSlidesNodes.forEach(slideNode => {
       const sliderContainerNode = slideNode?.parentNode?.parentNode?.parentNode
