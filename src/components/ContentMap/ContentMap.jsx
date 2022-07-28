@@ -23,7 +23,6 @@ function ContentMap(props) {
       slidesToScroll: 1,
       slide: 'aside',
       onReInit: (container) => console.log(container),
-      // className: recommendedItems?.length < 3 ? 'slice-center-fork' : ''
       className:'slider-container'
     };
   }, [recommendedItems])
