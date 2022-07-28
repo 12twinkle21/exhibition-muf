@@ -13,9 +13,6 @@ const TRANSLATION_LANGUAGES = {
   ru: {viewName: 'ENG', nativeName: 'Russian'}
 };
 
-const MAX_FILTERED_ALL_OBJECTS = 5000
-
-
 function Main() {
   const [isPending, startTransition] = useTransition();
 
@@ -496,7 +493,6 @@ function Main() {
 
 
   const [filtredRecommendedItems, setFiltredRecommendedItems] = useState([])
-
   useEffect(() => {
     startTransition(() => {
       if (!activeSportTagIds?.length) {
@@ -516,23 +512,25 @@ function Main() {
     })
   }, [activeSportTagIds, recommendedItems])
 
-  const [filtredAllObjects, setFiltredAllObjects] = useState([])
+  const [filtredAllObjects, setFiltredAllObjects] = useState({})
   useEffect(() => {
     startTransition(() => {
       if (!activeSportTagIds?.length) {
-        setFiltredAllObjects(allObjects.slice(0, MAX_FILTERED_ALL_OBJECTS))
+        setFiltredAllObjects({})
+        return
       }
-      const newReturnedItems = []
+      const newReturnedItems = {}
 
       const filteredTags = sportsTags.filter(sportTag => activeSportTagIds.some(activeTag => activeTag === sportTag.id))
       if (!filteredTags.length) {
-        setFiltredAllObjects(allObjects.slice(0, MAX_FILTERED_ALL_OBJECTS))
+        setFiltredAllObjects({})
+        return
       }
-      for (let i = 0, len = allObjects.slice(0, MAX_FILTERED_ALL_OBJECTS).length; i < len; i++) {
+      for (let i = 0, len = allObjects.length; i < len; i++) {
         const item = allObjects[i]
         const itemTags = JSON.parse(item.sport_type)
         if (filteredTags.every(filterTag => itemTags.includes(filterTag.ru))) {
-          newReturnedItems.push(item)
+          newReturnedItems[item.id] = true
         }
       }
       setFiltredAllObjects(newReturnedItems)
@@ -554,6 +552,14 @@ function Main() {
         <button className={styles.LangBtn} onClick={changeLanguage}>
           <span>{TRANSLATION_LANGUAGES[langKey].viewName}</span>
         </button>
+        <div className={styles.MoscowLogo}>
+          <div className={styles.MoscowLogo__img}>
+            <img src="img/moscow_flag.svg" alt=""/>
+          </div>
+          <div className={styles.MoscowLogo__text}>
+            {t('leftFloatText.moscow_logo')}
+          </div>
+        </div>
         <div className={styles.main__content}>
           <LeftPanel
             activeSportTagIds={activeSportTagIds}
@@ -570,25 +576,6 @@ function Main() {
       </div>
     </>
   )
-}
-
-export function useDebounce(value, delay) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(
-    () => {
-      const handler = setTimeout(() => {
-        setDebouncedValue(value);
-      }, delay);
-
-      return () => {
-        clearTimeout(handler);
-      };
-    },
-    [value]
-  );
-
-  return debouncedValue;
 }
 
 export default Main;

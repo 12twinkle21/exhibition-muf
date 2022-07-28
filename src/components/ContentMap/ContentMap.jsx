@@ -1,4 +1,4 @@
-import React, {useMemo, useRef} from 'react';
+import React, {useMemo, useRef, useState} from 'react';
 import styles from './ContentMap.module.scss';
 import Slider from "react-slick";
 import MapComponent from '../../components/MapComponent';
@@ -8,6 +8,8 @@ import i18n from "../../i18n";
 function ContentMap(props) {
   const {allObjects, recommendedItems} = props
   const sliderContainer = useRef()
+
+  const [activeRecomendCard, setActiveRecomendCard] = useState(null)
 
   const isRuLocal = useMemo(() => i18n.language === 'ru', [i18n.language])
 
@@ -23,13 +25,13 @@ function ContentMap(props) {
 
   return (
     <div className={styles.contentMap}>
-      <MapComponent mapMarks={allObjects}/>
+      <MapComponent mapMarks={allObjects} activeRecomendCard={activeRecomendCard}/>
       {recommendedItems?.length
         ?       <div className={styles.contentMap__recommendation} ref={sliderContainer}>
           <Slider {...SWIPER_SETTINGS} infinite={recommendedItems?.length > 3} arrows={true}>
             {
               recommendedItems.map((items) => (
-                <RecommendationCard isRuLocal={isRuLocal} items={items} data-key={`${items.name_ru}_${items.id}`} key={`${items.name_ru}_${items.id}`}/>)
+                <RecommendationCard activeRecomendCard={activeRecomendCard} setActiveRecomendCard={setActiveRecomendCard} isRuLocal={isRuLocal} items={items} data-key={`${items.name_ru}_${items.id}`} key={`${items.name_ru}_${items.id}`}/>)
               )
             }
           </Slider>

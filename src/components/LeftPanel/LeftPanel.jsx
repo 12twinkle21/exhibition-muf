@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {VirtualKeyboard} from "../VirtualKeyboard/VirtualKeyboard";
 import {useTranslation} from "react-i18next";
 import styles from './LeftPanel.module.scss';
-import {useDebounce} from "../../pages/Main/Main";
 
 function LeftPanel(props) {
   const {
@@ -15,18 +14,45 @@ function LeftPanel(props) {
   const {t} = useTranslation();
 
   const [searchTerm, setSearchTerm] = useState('');
-  const debouncedSearchTerm = useDebounce(searchTerm, 1500);
+
+  const debouncedSearchTerm = useThrottle(searchTerm, 1000);
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(
     () => {
       startTransition(() => {
         if (debouncedSearchTerm) {
-          setSearchResults(sportsTags.filter((item) => item.en.toLowerCase().includes(searchTerm.toLowerCase()) || item.ru.toLowerCase().includes(searchTerm.toLowerCase()) || activeSportTagIds.includes(item.id)));
+          setSearchResults(
+            sportsTags
+              .filter((item) =>
+                item.en.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.ru.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                activeSportTagIds.includes(item.id))
+              .sort((item1, item2) => {
+                const isFirstItemActive = activeSportTagIds.includes(item1.id)
+                const isSecondItemActive = activeSportTagIds.includes(item2.id)
+                if (isFirstItemActive > isSecondItemActive) {
+                  return -1
+                } else if (isFirstItemActive > isSecondItemActive) {
+                  return 1
+                } else {
+                  return 0
+                }
+              }));
         } else if (searchTerm) {
           setSearchResults([]);
         } else {
-          setSearchResults(sportsTags);
+          setSearchResults(sportsTags.sort((item1, item2) => {
+            const isFirstItemActive = activeSportTagIds.includes(item1.id)
+            const isSecondItemActive = activeSportTagIds.includes(item2.id)
+            if (isFirstItemActive > isSecondItemActive) {
+              return -1
+            } else if (isFirstItemActive > isSecondItemActive) {
+              return 1
+            } else {
+              return 0
+            }
+          }))
         }
       })
     },
@@ -75,5 +101,27 @@ function LeftPanel(props) {
     </div>
   )
 }
+
+function useThrottle(value, interval = 500) {
+  const [throttledValue, setThrottledValue] = useState(value)
+  const lastExecuted = useRef(Date.now())
+
+  useEffect(() => {
+    if (Date.now() >= lastExecuted.current + interval) {
+      lastExecuted.current = Date.now()
+      setThrottledValue(value)
+    } else {
+      const timerId = setTimeout(() => {
+        lastExecuted.current = Date.now()
+        setThrottledValue(value)
+      }, interval)
+
+      return () => clearTimeout(timerId)
+    }
+  }, [value, interval])
+
+  return throttledValue
+}
+
 
 export default LeftPanel;

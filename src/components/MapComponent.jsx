@@ -1,5 +1,6 @@
-import React, {useEffect, useRef, useState} from "react";
-import {YMaps, Map, Placemark, Clusterer} from "react-yandex-maps";
+import React, {useEffect, useMemo, useRef, useState} from "react";
+import {YMaps, Map, Placemark, Clusterer, ObjectManager} from "react-yandex-maps";
+import {ALL_OBJECTS_JSON} from "../pages/Main/dataFromServer";
 
 const MAP_SETTINGS = {
   center: [55.751574, 37.573856],
@@ -7,25 +8,54 @@ const MAP_SETTINGS = {
 };
 
 function MapComponent(props) {
-  const {mapMarks} = props
+  const {mapMarks, activeRecomendCard} = props
+  const [allObjects, setAllObjects] = useState(ALL_OBJECTS_JSON)
   const [mapRef, setMapRef] = useState()
-  const [clusterRef, setCluster] = useState()
-  const [lastRenderPlacemarkRef, setLastRenderPlacemarkRef] = useState()
+
+  const features = useMemo(() => {
+    return allObjects.map(item => {
+      const currentMarkTags = JSON.parse(item.sport_type)
+
+      return {
+        type: "Feature",
+        id: item.id,
+        geometry: {
+          type: "Point",
+          coordinates: [item.latitude, item.longitude]
+        },
+        properties: {
+          balloonContent: PlacemarkBalloon({
+            title: item.name,
+            tags: currentMarkTags,
+            address: item.address
+          }),
+        },
+        options: {
+          id: item.id,
+          balloonOffset: [0, -30],
+          hideIconOnBalloonOpen: false,
+          iconLayout: 'default#image',
+          iconImageHref: 'img/point.svg',
+          iconImageSize: [100, 100],
+          iconImageOffset: [-50, -50],
+        },
+        modules: ['geoObject.addon.balloon']
+      }
+    });
+  }, [allObjects])
 
   useEffect(() => {
-    if (!mapRef || !mapMarks?.length || !clusterRef) {
+    if (!mapRef || !allObjects?.length || !activeRecomendCard) {
       mapRef?.balloon?.close()
       return
     }
-    const firstMark = mapMarks[0]
-    const allPlacemarkNodes = clusterRef.getGeoObjects()
-    const firstPlacemarkNode = allPlacemarkNodes[0]
-    if (!firstMark || !allPlacemarkNodes?.length || !firstPlacemarkNode) {
+    const firstMark = allObjects.find(placemark => placemark.id === activeRecomendCard)
+    if (!firstMark) {
       mapRef?.balloon?.close()
       return;
     }
     const currentMarkTags = JSON.parse(firstMark.sport_type)
-    mapRef.balloon.close()
+
     setTimeout(() => {
       mapRef.balloon.open([Number(firstMark.latitude), Number(firstMark.longitude)], PlacemarkBalloon({
         title: firstMark.name,
@@ -36,62 +66,20 @@ function MapComponent(props) {
     setTimeout(() => {
       mapRef.setCenter([Number(firstMark.latitude), Number(firstMark.longitude)], 18)
     }, 500)
-  }, [mapMarks, lastRenderPlacemarkRef, mapRef, clusterRef])
-
+  }, [activeRecomendCard, mapRef])
   return (
     <YMaps>
       <Map defaultState={MAP_SETTINGS} className='map' instanceRef={map => setMapRef(map)}>
-        <Clusterer options={{preset: 'islands#invertedNightClusterIcons', viewportMargin: 1280, gridSize: 256}} instanceRef={ref => {
-          if (ref) {
-            setCluster(ref);
-          }
-        }}>
-          {mapMarks?.length
-            ? mapMarks.map((item, index) => {
-              const currentMarkTags = JSON.parse(item.sport_type)
-
-              return (
-                <Placemark key={item.id}
-                           properties={{
-                             balloonContent: PlacemarkBalloon({
-                               title: item.name,
-                               tags: currentMarkTags,
-                               address: item.address
-                             }),
-                           }}
-                           onClick={() => {
-                             const currentOpenedBalloonPosition = mapRef?.balloon?.getPosition()
-                             if (!currentOpenedBalloonPosition) {
-                               return
-                             }
-                             const currentItemPosition = [Number(item.latitude), Number(item.longitude)]
-                             if (currentOpenedBalloonPosition[0] === currentItemPosition[0] && currentOpenedBalloonPosition[1] === currentItemPosition[1]) {
-                               setTimeout(() => mapRef?.balloon.close(), 20)
-                             }
-                           }}
-                           options={{
-                             balloonOffset: [0, -30],
-                             hideIconOnBalloonOpen: false,
-                             iconLayout: 'default#image',
-                             iconImageHref: 'img/point.svg',
-                             iconImageSize: [100, 100],
-                             iconImageOffset: [-50, -50],
-                           }}
-                           modules={
-                             ['geoObject.addon.balloon']
-                           }
-                           instanceRef={ref => {
-                             if (index === mapMarks.length - 1 && ref) {
-                               setLastRenderPlacemarkRef(ref)
-                             }
-                           }}
-                           geometry={[item.latitude, item.longitude]}
-                />
-              )
-            })
-            : ''
-          }
-        </Clusterer>
+        <ObjectManager
+          options={{clusterize: true, gridSize: 256}}
+          objects={{openBalloonOnClick: true, preset:'islands#greenDotIcon'}}
+          clusters={{preset: 'islands#invertedNightClusterIcons', viewportMargin: 1280, gridSize: 256}}
+          defaultFeatures={features}
+          filter={object => {
+            return typeof mapMarks[object.options.id] !== 'undefined'
+          }}
+          modules={['objectManager.addon.objectsBalloon', 'objectManager.addon.objectsHint']}>
+        </ObjectManager>
       </Map>
     </YMaps>
   );
