@@ -409,12 +409,8 @@ i18n
           searchInputPlaceholder: 'Поиск',
           leftFloatText: {
             part1: 'ПОИСК ',
-<<<<<<< HEAD
-            part2: 'ПО ВИДАМ СПОРТА'
-=======
-            part2: 'ПО ОРГАНИЗАЦИЯМ',
+            part2: 'ПО ВИДАМ СПОРТА',   
             moscow_logo: 'проект правительства москвы'
->>>>>>> e6dfcbab04204df7d1a402fa9ab75aca9ac51341
           },
           map: {
             recomendationTitle: 'Рекомендации:'
