@@ -408,7 +408,7 @@ i18n
           searchInputPlaceholder: 'Поиск',
           leftFloatText: {
             part1: 'ПОИСК ',
-            part2: 'ПО ОРГАНИЗАЦИЯМ'
+            part2: 'ПО ВИДАМ СПОРТА'
           },
           map: {
             recomendationTitle: 'Рекомендации:'

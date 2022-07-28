@@ -79,6 +79,7 @@
     cursor: pointer;
     font-weight: 400;
     transition: background 0.3s, color 0.3s, font-weight 0.3s;
+    margin-bottom: calcSize(20);
 
     &--m-active {
       background: #315390;
