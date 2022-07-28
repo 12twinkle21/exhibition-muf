@@ -43,6 +43,7 @@ function ContentMap(props) {
     })
     console.log(filteredSlidersNodes);
     if(!filteredSlidersNodes.length || recommendedItems?.length >= 3){
+      filteredSlidersNodes.map(filteredNode => filteredNode.classList.remove('slick-center-fork'))
       return;
     }
     filteredSlidersNodes.forEach(filteredNode => filteredNode.classList.add('slick-center-fork'))
