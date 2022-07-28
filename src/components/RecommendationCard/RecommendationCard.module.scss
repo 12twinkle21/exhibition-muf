@@ -1,4 +1,5 @@
 @import "../../index";
+:global(.slick-center){
 :global(.recommendationCard--m-active){
   :global(.recommendationCard__front) {
     transform: rotateX(180deg) !important;
@@ -8,6 +9,7 @@
     opacity: 1 !important;
     z-index: 2 !important;
   }
+}
 }
 .recommendationCard {
   height: calcSize(3450);

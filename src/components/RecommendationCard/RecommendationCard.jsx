@@ -79,7 +79,6 @@ function RecommendationCard(props) {
       <div className={styles.recommendationCard__back + ' ' + 'recommendationCard__back'} onClick={onVisibleBackCard}>
         <p>{isRuLocal ? items.description_ru : items.description_en}</p>
       </div>
-      }
     </div>
 
   )
