@@ -2,9 +2,12 @@ import React, {useEffect, useMemo, useRef, useState} from "react";
 import {YMaps, Map, Placemark, Clusterer, ObjectManager} from "react-yandex-maps";
 import {ALL_OBJECTS_JSON} from "../pages/Main/dataFromServer";
 
+const defaultX = 55.4
+const defaultY = 37.573856
+const defaultZoom = 9
 const MAP_SETTINGS = {
-  center: [55.751574, 37.573856],
-  zoom: 10,
+  center: [defaultX, defaultY],
+  zoom: defaultZoom,
 };
 
 function MapComponent(props) {
@@ -48,8 +51,8 @@ function MapComponent(props) {
     if (!mapRef || !allObjects?.length || !activeRecomendCard) {
       mapRef?.balloon?.close()
       setTimeout(() => {
-        mapRef.balloon.close()
-        mapRef.setCenter([55.751574, 37.573856], 10)
+        mapRef?.balloon.close()
+        mapRef?.setCenter([defaultX, defaultY], defaultZoom)
       }, 0)
       return
     }
@@ -61,21 +64,21 @@ function MapComponent(props) {
     const currentMarkTags = JSON.parse(firstMark.sport_type)
 
     setTimeout(() => {
-      mapRef.balloon.open([Number(firstMark.latitude), Number(firstMark.longitude)], PlacemarkBalloon({
+      mapRef?.balloon.open([Number(firstMark.latitude), Number(firstMark.longitude)], PlacemarkBalloon({
         title: firstMark.name,
         tags: currentMarkTags,
         address: firstMark.address
       }))
     }, 500)
     setTimeout(() => {
-      mapRef.setCenter([Number(firstMark.latitude), Number(firstMark.longitude)], 18)
+      mapRef?.setCenter([Number(firstMark.latitude), Number(firstMark.longitude)], 18)
     }, 500)
   }, [activeRecomendCard, mapRef])
 
   useEffect(() => {
     setTimeout(() => {
-      mapRef.balloon.close()
-      mapRef.setCenter([55.751574, 37.573856], 10)
+      mapRef?.balloon.close()
+      mapRef?.setCenter([55.751574, 37.573856], 10)
     }, 0)
   }, [mapMarks])
   return (
