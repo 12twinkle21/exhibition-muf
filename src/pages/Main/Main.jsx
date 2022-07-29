@@ -544,14 +544,6 @@ function Main() {
     })
   }, [activeSportTagIds, allObjects])
 
-
-  const [kekItems, setKekItems] = useState();
-        axios.get('https://exhibition-muf-maps.truemachine.space/api/objects').then((resp) => {
-        const recommendedKek = resp.data.data;
-        setKekItems(recommendedKek.items);
-        });
-        console.log(kekItems)
-
   return (
     <>
       <Spinner isLoading={isPending}/>
