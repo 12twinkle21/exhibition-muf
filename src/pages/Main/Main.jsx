@@ -275,7 +275,7 @@ function Main() {
       {id: 'id--skiing', en: 'Skiing', viewName: t('leftMenu.tags.skiing'), ru: 'Катание на лыжах'},
       {id: 'id--checkers', en: 'Checkers', viewName: t('leftMenu.tags.checkers'), ru: 'Шашки'},
       {id: 'id--board_games', en: 'Board games', viewName: t('leftMenu.tags.board_games'), ru: 'Настольные игры'},
-      {id: 'id--curling', en: 'Curling', viewName: t('leftMenu.tags.curling'), ru: 'Кёрлинг'},
+      {id: 'id--curling', en: 'Curling', viewName: t('leftMenu.tags.curling'), ru: 'Керлинг'},
       {id: 'id--equestrian', en: 'Equestrian', viewName: t('leftMenu.tags.equestrian'), ru: 'Конный спорт'},
       {id: 'id--yoga', en: 'Yoga', viewName: t('leftMenu.tags.yoga'), ru: 'Йога'},
       {id: 'id--darts', en: 'Darts', viewName: t('leftMenu.tags.darts'), ru: 'Дартс'},

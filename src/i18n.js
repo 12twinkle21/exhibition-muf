@@ -335,7 +335,7 @@ i18n
               skiing: 'Катание на лыжах',
               checkers: 'Шашки',
               board_games: 'Настольные игры',
-              curling: 'Кёрлинг',
+              curling: 'Керлинг',
               equestrian: 'Конный спорт',
               yoga: 'Йога',
               darts: 'Дартс',
