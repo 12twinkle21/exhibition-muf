@@ -22,7 +22,6 @@ function ContentMap(props) {
       slidesToShow: 2.3,
       slidesToScroll: 1,
       slide: 'aside',
-      onReInit: (container) => console.log(container),
       className:'slider-container'
     };
   }, [recommendedItems])
@@ -40,7 +39,6 @@ function ContentMap(props) {
         filteredSlidersNodes.push(slideNode)
       }
     })
-    console.log(filteredSlidersNodes);
     if(!filteredSlidersNodes.length || recommendedItems?.length >= 3){
       filteredSlidersNodes.map(filteredNode => filteredNode.classList.remove('slick-center-fork'))
       return;
