@@ -80,7 +80,7 @@ function Main() {
       },
       {id: 'id--crossfit', en: 'Crossfit', viewName: t('leftMenu.tags.crossfit'), ru: 'Кроссфит'},
       {id: 'id--karate', en: 'Karate', viewName: t('leftMenu.tags.karate'), ru: 'Каратэ'},
-      {id: 'id--jiu_jitsu', en: 'Jiu Jitsu', viewName: t('leftMenu.tags.jiu_jitsu'), ru: 'Джиу Джитсу'},
+      {id: 'id--jiu_jitsu', en: 'Jiu Jitsu', viewName: t('leftMenu.tags.jiu_jitsu'), ru: 'Джиу-джитсу'},
       {id: 'id--grappling', en: 'Grappling', viewName: t('leftMenu.tags.grappling'), ru: 'Грэпплинг'},
       {id: 'id--kickboxing', en: 'Kickboxing', viewName: t('leftMenu.tags.kickboxing'), ru: 'Кикбоксинг'},
       {id: 'id--basketball', en: 'Basketball', viewName: t('leftMenu.tags.basketball'), ru: 'Баскетбол'},
@@ -150,7 +150,7 @@ function Main() {
         id: 'id--long_jump_high_jump_triple_jump',
         en: 'Long jump, high jump, triple jump',
         viewName: t('leftMenu.tags.long_jump_high_jump_triple_jump'),
-        ru: 'Прыжки в длину,  высоту, тройной прыжок'
+        ru: 'Прыжки в длину, в высоту, тройной прыжок'
       },
       {id: 'id--pole_vault', en: 'Pole vault', viewName: t('leftMenu.tags.pole_vault'), ru: 'Прыжки с шестом'},
       {id: 'id--shot_put', en: 'Shot put', viewName: t('leftMenu.tags.shot_put'), ru: 'Толкание ядра'},
@@ -291,7 +291,6 @@ function Main() {
       },
       {id: 'id--waterskiing', en: 'Waterskiing', viewName: t('leftMenu.tags.waterskiing'), ru: 'Воднолыжный спорт'},
       {id: 'id--armlifting', en: 'Armlifting', viewName: t('leftMenu.tags.armlifting'), ru: 'Армлифтинг'},
-      {id: 'id--gymnastics', en: 'Gymnastics', viewName: t('leftMenu.tags.gymnastics'), ru: 'Гимнастика'},
       {id: 'id--mas_wrestling', en: 'Mas-wrestling', viewName: t('leftMenu.tags.mas_wrestling'), ru: 'Мас-рестлинг'},
       {id: 'id--thai_boxing', en: 'Thai boxing', viewName: t('leftMenu.tags.thai_boxing'), ru: 'Тайский бокс'},
       {id: 'id--cheerleading', en: 'Cheerleading', viewName: t('leftMenu.tags.cheerleading'), ru: 'Черлидинг'},
@@ -434,7 +433,7 @@ function Main() {
         id: 'id--sports_for_persons_with_disabilities_of_all_categories',
         en: 'Sports for persons with disabilities of all categories',
         viewName: t('leftMenu.tags.sports_for_persons_with_disabilities_of_all_categories'),
-        ru: 'Спорт для лиц с ограниченными возможностями здоровья всех категорий'
+        ru: 'Спорт лиц с ограниченными возможностями здоровья всех категорий'
       },
       {id: 'id--boccia', en: 'Boccia', viewName: t('leftMenu.tags.boccia'), ru: 'Бочча'},
       {

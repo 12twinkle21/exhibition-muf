@@ -16,7 +16,7 @@ function RecommendationCard(props) {
     }
     setVisibleBackCard(!visibleBackCard)
   }
- 
+  console.log(items)
   const SWIPER_SETTINGS = {
     dots: true,
     infinite: true,
