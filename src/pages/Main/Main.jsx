@@ -5,6 +5,8 @@ import LeftPanel from "../../components/LeftPanel/LeftPanel";
 import ContentMap from "../../components/ContentMap/ContentMap";
 import {ALL_OBJECTS_JSON, DETAILT_RECOMENDED_ITEMS} from "./dataFromServer";
 import Spinner from "./Spinner";
+import axios from 'axios';
+
 
 const DEFAULT_LANG_KEY = 'ru'
 
@@ -541,7 +543,15 @@ function Main() {
       setFiltredAllObjects(newReturnedItems)
     })
   }, [activeSportTagIds, allObjects])
-  
+
+
+  const [kekItems, setKekItems] = useState();
+        axios.get('https://exhibition-muf-maps.truemachine.space/api/objects').then((resp) => {
+        const recommendedKek = resp.data.data;
+        setKekItems(recommendedKek.items);
+        });
+        console.log(kekItems)
+
   return (
     <>
       <Spinner isLoading={isPending}/>
