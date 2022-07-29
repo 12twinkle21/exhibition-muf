@@ -234,7 +234,7 @@ i18n
             tags: {
               football: 'Футбол',
               athletics: 'Легкая атлетика',
-              rugby_7: 'Регби 7',
+              rugby_7: 'Регби-7',
               hockey: 'Хоккей',
               boxing: 'Бокс',
               sambo: 'Самбо',

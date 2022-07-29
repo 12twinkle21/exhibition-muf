@@ -40,7 +40,7 @@ function Main() {
     return [
       {id: 'id--football', en: 'Football', viewName: t('leftMenu.tags.football'), ru: 'Футбол'},
       {id: 'id--athletics', en: 'Athletics', viewName: t('leftMenu.tags.athletics'), ru: 'Легкая атлетика'},
-      {id: 'id--rugby_7', en: 'Rugby 7', viewName: t('leftMenu.tags.rugby_7'), ru: 'Регби 7'},
+      {id: 'id--rugby_7', en: 'Rugby 7', viewName: t('leftMenu.tags.rugby_7'), ru: 'Регби-7'},
       {id: 'id--hockey', en: 'Hockey', viewName: t('leftMenu.tags.hockey'), ru: 'Хоккей'},
       {id: 'id--boxing', en: 'Boxing', viewName: t('leftMenu.tags.boxing'), ru: 'Бокс'},
       {id: 'id--sambo', en: 'Sambo', viewName: t('leftMenu.tags.sambo'), ru: 'Самбо'},
