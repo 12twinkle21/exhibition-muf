@@ -6,13 +6,15 @@ function RecommendationCard(props) {
   const {items, isRuLocal, setActiveRecomendCard} = props;
   const [visibleBackCard, setVisibleBackCard] = React.useState(false);
   const onVisibleBackCard = (e) => {
+    if(!e.nativeEvent.path.some(node => node.classList.contains('slick-center') || node.classList.contains('slick-center-fork'))){
+      return
+    }
     if(!visibleBackCard){
-      setActiveRecomendCard(3834)
+      setActiveRecomendCard(items.object_id)
     }else{
       setActiveRecomendCard(null)
     }
     setVisibleBackCard(!visibleBackCard)
-    console.log(e.currentTarget)
   }
  
   const SWIPER_SETTINGS = {

@@ -47,6 +47,10 @@ function MapComponent(props) {
   useEffect(() => {
     if (!mapRef || !allObjects?.length || !activeRecomendCard) {
       mapRef?.balloon?.close()
+      setTimeout(() => {
+        mapRef.balloon.close()
+        mapRef.setCenter([55.751574, 37.573856], 10)
+      }, 0)
       return
     }
     const firstMark = allObjects.find(placemark => placemark.id === activeRecomendCard)
